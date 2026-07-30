@@ -187,6 +187,14 @@ namespace DECa.Pdf.Forms
         }
 
         /// <summary>
+        /// Marca el diccionario PDF del campo como modificado.
+        /// </summary>
+        internal void SetModified()
+        {
+            _isModified = true;
+        }
+
+        /// <summary>
         /// Marca el campo como de solo lectura en el diccionario AcroForm.
         /// </summary>
         internal void SetReadOnly()

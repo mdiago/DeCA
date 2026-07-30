@@ -87,6 +87,11 @@ namespace DECa.Pdf.Core
         private readonly Dictionary<string, PdfObject> _trailerValues =
             new Dictionary<string, PdfObject>(StringComparer.Ordinal);
 
+        /// <summary>
+        /// Siguiente número de objeto disponible para los objetos nuevos de la revisión.
+        /// </summary>
+        private int _nextObjectNumber;
+
         #endregion
 
         #region Constructores de Instancia
@@ -102,6 +107,7 @@ namespace DECa.Pdf.Core
             _source = source ?? throw new ArgumentNullException(nameof(source));
             _trailer = trailer ?? throw new ArgumentNullException(nameof(trailer));
             _previousXref = previousXref;
+            _nextObjectNumber = (_trailer.Get("Size") as PdfNumber)?.ToInt32() ?? 1;
         }
 
         #endregion
@@ -316,6 +322,25 @@ namespace DECa.Pdf.Core
                 throw new ArgumentNullException(nameof(value));
 
             _trailerValues[key] = value;
+        }
+
+        /// <summary>
+        /// Añade un objeto nuevo a la revisión incremental.
+        /// </summary>
+        /// <param name="value">Contenido del nuevo objeto.</param>
+        /// <returns>Referencia indirecta asignada al objeto.</returns>
+        internal PdfReference AddObject(PdfObject value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            while (_objects.ContainsKey(_nextObjectNumber))
+                _nextObjectNumber++;
+
+            PdfReference reference = new PdfReference(_nextObjectNumber, 0);
+            SetObject(reference, value);
+            _nextObjectNumber++;
+            return reference;
         }
 
         /// <summary>

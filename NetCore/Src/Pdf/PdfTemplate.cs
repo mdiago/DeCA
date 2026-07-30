@@ -1,4 +1,4 @@
-/*
+﻿/*
     This file is part of the DECa (R) project.
     Copyright (c) 2026 Irene Solutions SL
     Authors: Irene Solutions SL.
@@ -37,8 +37,10 @@
     address: info@irenesolutions.com
  */
 
+using DECa.Pdf.Appearance;
 using DECa.Pdf.Core;
 using DECa.Pdf.Forms;
+using DECa.Pdf.Images;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
@@ -73,6 +75,12 @@ namespace DECa.Pdf
         /// Índice de campos AcroForm por su nombre completo.
         /// </summary>
         private readonly Dictionary<string, PdfFormField> _fieldsByName;
+
+        /// <summary>
+        /// Imágenes pendientes de aplicar a campos de formulario de tipo botón.
+        /// </summary>
+        private readonly Dictionary<string, PdfBitmap> _buttonImages =
+            new Dictionary<string, PdfBitmap>(StringComparer.Ordinal);
 
         /// <summary>
         /// Diccionario AcroForm asociado al documento.
@@ -208,10 +216,9 @@ namespace DECa.Pdf
 
             if (_documentInformationReference == null)
             {
-                int objectNumber =
-                    (_parser.Trailer.Get("Size") as PdfNumber)?.ToInt32() ?? 1;
-                _documentInformationReference = new PdfReference(objectNumber, 0);
+                _documentInformationReference = writer.AddObject(_documentInformation);
                 writer.SetTrailerValue("Info", _documentInformationReference);
+                return;
             }
 
             writer.SetObject(_documentInformationReference, _documentInformation);
@@ -330,6 +337,49 @@ namespace DECa.Pdf
 
 
         /// <summary>
+        /// Crea y aplica las apariencias de imagen pendientes para los campos de botón.
+        /// </summary>
+        /// <param name="writer">Escritor de la nueva revisión incremental.</param>
+        private void ApplyButtonImages(PdfWriter writer)
+        {
+            foreach (KeyValuePair<string, PdfBitmap> item in _buttonImages)
+            {
+                PdfFormField field = GetField(item.Key);
+                PdfImage image = PdfImage.FromBitmap(item.Value);
+                PdfReference imageReference = writer.AddObject(image.CreateStream());
+                PdfArray rectangle = field.Dictionary.Get("Rect") as PdfArray;
+                PdfFormXObject appearance = PdfFormXObject.FromImage(
+                    rectangle, image, imageReference);
+                PdfReference appearanceReference = writer.AddObject(
+                    appearance.CreateStream());
+
+                PdfDictionary appearances = new PdfDictionary();
+                appearances.Set("N", appearanceReference);
+                field.Dictionary.Set("AP", appearances);
+
+                PdfDictionary iconFit = new PdfDictionary();
+                iconFit.Set("SW", new PdfName("A"));
+                iconFit.Set("S", new PdfName("P"));
+
+                PdfArray alignment = new PdfArray();
+                alignment.Items.Add(new PdfNumber(0.5));
+                alignment.Items.Add(new PdfNumber(0.5));
+                iconFit.Set("A", alignment);
+                iconFit.Set("FB", new PdfBoolean(true));
+
+                PdfDictionary appearanceCharacteristics =
+                    field.Dictionary.Get("MK") as PdfDictionary ?? new PdfDictionary();
+                appearanceCharacteristics.Remove("CA");
+                appearanceCharacteristics.Set("I", appearanceReference);
+                appearanceCharacteristics.Set("IF", iconFit);
+                appearanceCharacteristics.Set("TP", new PdfNumber(1));
+                field.Dictionary.Set("MK", appearanceCharacteristics);
+                field.Dictionary.Set("H", new PdfName("N"));
+                field.SetModified();
+            }
+        }
+
+        /// <summary>
         /// Aplica al modelo PDF interno los valores de todos los campos modificados.
         /// </summary>
         /// <returns>Verdadero cuando existe al menos un campo modificado.</returns>
@@ -373,6 +423,7 @@ namespace DECa.Pdf
             ApplyModifiedValues();
 
             PdfWriter writer = new PdfWriter(_source, _parser.Trailer, _parser.StartXref);
+            ApplyButtonImages(writer);
             ApplyDocumentInformation(writer);
 
             foreach (PdfFormField field in _fields)
@@ -491,6 +542,50 @@ namespace DECa.Pdf
 
             ValidateTextValue(field);
             field.SetValue(value);
+        }
+
+        /// <summary>
+        /// Establece la imagen BMP que se mostrará como apariencia normal de un campo botón.
+        /// </summary>
+        /// <param name="fieldName">Nombre completo del campo de formulario.</param>
+        /// <param name="bitmap">Contenido binario de una imagen BMP BI_RGB de 24 o 32 bits.</param>
+        /// <exception cref="ArgumentException">El nombre está vacío, el BMP no es válido o el campo no es un botón.</exception>
+        /// <exception cref="ArgumentNullException">La imagen es nula.</exception>
+        /// <exception cref="KeyNotFoundException">No existe el campo indicado.</exception>
+        public void SetButtonImage(string fieldName, byte[] bitmap)
+        {
+            if (string.IsNullOrWhiteSpace(fieldName))
+                throw new ArgumentException("Debe indicar el nombre del campo.", nameof(fieldName));
+            if (bitmap == null)
+                throw new ArgumentNullException(nameof(bitmap));
+
+            PdfFormField field = GetField(fieldName);
+            if (field == null)
+                throw new KeyNotFoundException(
+                    $"No existe ningún campo PDF con el nombre '{fieldName}'.");
+            if (field.FieldType != PdfFormFieldType.PushButton)
+                throw new ArgumentException(
+                    $"El campo '{fieldName}' no es un botón de tipo PushButton.", nameof(fieldName));
+
+            _buttonImages[fieldName] = PdfBitmap.Load((byte[])bitmap.Clone());
+        }
+
+        /// <summary>
+        /// Establece la imagen BMP que se mostrará como apariencia normal de un campo botón.
+        /// </summary>
+        /// <param name="fieldName">Nombre completo del campo de formulario.</param>
+        /// <param name="bitmap">Stream que contiene una imagen BMP BI_RGB de 24 o 32 bits.</param>
+        /// <exception cref="ArgumentNullException">El stream es nulo.</exception>
+        public void SetButtonImage(string fieldName, Stream bitmap)
+        {
+            if (bitmap == null)
+                throw new ArgumentNullException(nameof(bitmap));
+
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.CopyTo(memory);
+                SetButtonImage(fieldName, memory.ToArray());
+            }
         }
 
         /// <summary>
