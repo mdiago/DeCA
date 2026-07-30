@@ -1,4 +1,4 @@
-﻿/*
+/*
     This file is part of the DECa (R) project.
     Copyright (c) 2026 Irene Solutions SL
     Authors: Irene Solutions SL.
@@ -37,36 +37,28 @@
     address: info@irenesolutions.com
  */
 
-using System.Globalization;
-
-namespace DECa.Net.Rest.Json.Serializer
+namespace DECa.Qrcode 
 {
-
-    /// <summary>
-    /// Serializador para decimales.
-    /// </summary>
-    internal class JsonDecimalSerializer : IJsonSerializer
+    
+    /// <summary>These are a set of hints that you may pass to Writers to specify their behavior.</summary>
+    /// <author>dswitkin@google.com (Daniel Switkin)</author>
+    public sealed class EncodeHintType 
     {
 
-        #region Métodos Públicos de Instancia
+        /// <summary>Specifies what degree of error correction to use, for example in QR Codes (type Integer).</summary>
+        public static readonly EncodeHintType ERROR_CORRECTION = new EncodeHintType
+            ();
 
-        /// <summary>
-        /// Devuelve la representación en JSON
-        /// de la propiedad facilitada para la
-        /// instancia facilitada.
-        /// </summary>
-        /// <param name="value">Valor a serializar.</param>
-        /// <returns>Representación JSON de la propiedad.</returns>
-        public string ToJson(object value)
-        {
+        /// <summary>Specifies what character encoding to use where applicable (type String)</summary>
+        public static readonly EncodeHintType CHARACTER_SET = new EncodeHintType
+            ();
 
-            var d = Convert.ToDouble(value);
+        /// <summary>Specifies the minimal version level to use, for example in QR Codes (type Integer).</summary>
+        public static readonly EncodeHintType MIN_VERSION_NR = new EncodeHintType
+            ();
 
-            return d.ToString(new NumberFormatInfo());            
-
+        private EncodeHintType() {
         }
-
-        #endregion
 
     }
 

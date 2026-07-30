@@ -38,9 +38,6 @@
  */
 
 using DECa.Net.Rest.Json.Kivu;
-using DECa.Net.Rest.Json;
-using System;
-using System.Collections.Generic;
 
 namespace DECa.Business
 {

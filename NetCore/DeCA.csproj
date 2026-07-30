@@ -12,8 +12,4 @@
     <Content Include="img\DECa.ico" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Doc\" />
-  </ItemGroup>
-
 </Project>

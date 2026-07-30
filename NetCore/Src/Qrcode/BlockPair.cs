@@ -1,4 +1,4 @@
-﻿/*
+/*
     This file is part of the DECa (R) project.
     Copyright (c) 2026 Irene Solutions SL
     Authors: Irene Solutions SL.
@@ -37,33 +37,46 @@
     address: info@irenesolutions.com
  */
 
-using System.Globalization;
-
-namespace DECa.Net.Rest.Json.Serializer
+namespace DECa.Qrcode 
 {
 
     /// <summary>
-    /// Serializador para decimales.
+    /// Helper class that groups a block of databytes with its corresponding block of error correction block.
     /// </summary>
-    internal class JsonDecimalSerializer : IJsonSerializer
+    /// <author>bruno@lowagie.com (Bruno Lowagie, Paulo Soares, et al.) - creator</author>
+    internal sealed class BlockPair 
     {
 
-        #region Métodos Públicos de Instancia
+        #region Variables Privadas de Instancia
 
-        /// <summary>
-        /// Devuelve la representación en JSON
-        /// de la propiedad facilitada para la
-        /// instancia facilitada.
-        /// </summary>
-        /// <param name="value">Valor a serializar.</param>
-        /// <returns>Representación JSON de la propiedad.</returns>
-        public string ToJson(object value)
+        private readonly ByteArray dataBytes;
+
+        private readonly ByteArray errorCorrectionBytes;
+
+        #endregion
+
+        #region Construtores de Instancia
+
+        internal BlockPair(ByteArray data, ByteArray errorCorrection)
         {
+            dataBytes = data;
+            errorCorrectionBytes = errorCorrection;
+        }
 
-            var d = Convert.ToDouble(value);
+        #endregion
 
-            return d.ToString(new NumberFormatInfo());            
+        #region M�todos P�blicos de Instancia
 
+        /// <returns>data block of the pair</returns>
+        public ByteArray GetDataBytes()
+        {
+            return dataBytes;
+        }
+
+        /// <returns>error correction block of the pair</returns>
+        public ByteArray GetErrorCorrectionBytes()
+        {
+            return errorCorrectionBytes;
         }
 
         #endregion

@@ -38,7 +38,6 @@
  */
 
 using DECa.Pdf.Core;
-using System;
 
 namespace DECa.Pdf.Forms
 {

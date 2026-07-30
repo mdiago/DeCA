@@ -1,4 +1,4 @@
-﻿/*
+/*
     This file is part of the DECa (R) project.
     Copyright (c) 2026 Irene Solutions SL
     Authors: Irene Solutions SL.
@@ -37,33 +37,28 @@
     address: info@irenesolutions.com
  */
 
-using System.Globalization;
-
-namespace DECa.Net.Rest.Json.Serializer
+namespace DECa.Qrcode.Exceptions
 {
 
     /// <summary>
-    /// Serializador para decimales.
+    /// A base class which covers the range of exceptions which may occur when encoding a barcode using
+    /// the Writer framework.
     /// </summary>
-    internal class JsonDecimalSerializer : IJsonSerializer
+    /// <author>dswitkin@google.com (Daniel Switkin)</author>
+    public sealed class WriterException : Exception 
     {
 
-        #region Métodos Públicos de Instancia
+        #region Construtores de Instancia        
 
-        /// <summary>
-        /// Devuelve la representación en JSON
-        /// de la propiedad facilitada para la
-        /// instancia facilitada.
-        /// </summary>
-        /// <param name="value">Valor a serializar.</param>
-        /// <returns>Representación JSON de la propiedad.</returns>
-        public string ToJson(object value)
-        {
+        /// <summary>Creates a WriterException.</summary>
+        public WriterException()
+            : base() {
+        }
 
-            var d = Convert.ToDouble(value);
-
-            return d.ToString(new NumberFormatInfo());            
-
+        /// <summary>Creates a WriterException with a message.</summary>
+        /// <param name="message">message of the exception</param>
+        public WriterException(String message)
+            : base(message) {
         }
 
         #endregion

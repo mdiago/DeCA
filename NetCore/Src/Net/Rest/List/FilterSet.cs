@@ -37,7 +37,6 @@
     address: info@irenesolutions.com
  */
 
-using System.Collections.Generic;
 using DECa.Net.Rest.Json.Kivu;
 
 namespace DECa.Net.Rest.List

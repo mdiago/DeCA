@@ -40,7 +40,6 @@
 using DECa.Common;
 using DECa.Config;
 using DECa.Net.Rest.Json.Kivu;
-using System;
 using System.Reflection;
 
 namespace DECa.Net.Rest

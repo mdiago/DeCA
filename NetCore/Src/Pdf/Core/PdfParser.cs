@@ -37,10 +37,7 @@
     address: info@irenesolutions.com
  */
 
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Text;
 
 namespace DECa.Pdf.Core

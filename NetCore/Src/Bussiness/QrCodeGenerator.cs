@@ -30,43 +30,64 @@
     develop commercial activities involving the DECa software without
     disclosing the source code of your own applications.
     These activities include: offering paid services to customers as an ASP,
-    serving DECa services on the fly in a web application, 
-    shipping DECa with a closed source product.
+    serving DECa XML data on the fly in a web application, shipping DECa
+    with a closed source product.
     
     For more information, please contact Irene Solutions SL. at this
     address: info@irenesolutions.com
  */
 
-using System.Globalization;
+using DECa.Qrcode.Exceptions;
+using DECa.Qrcode;
+using DECa.Common;
 
-namespace DECa.Net.Rest.Json.Serializer
+namespace DeCA.Bussiness
 {
 
     /// <summary>
-    /// Serializador para decimales.
+    /// Utiliddes para la generación de códigos QR.
     /// </summary>
-    internal class JsonDecimalSerializer : IJsonSerializer
+    public class QrCodeGenerator
     {
 
-        #region Métodos Públicos de Instancia
-
         /// <summary>
-        /// Devuelve la representación en JSON
-        /// de la propiedad facilitada para la
-        /// instancia facilitada.
+        /// Obtiene un bitmap con el contenido
+        /// codificado en un código QR.
         /// </summary>
-        /// <param name="value">Valor a serializar.</param>
-        /// <returns>Representación JSON de la propiedad.</returns>
-        public string ToJson(object value)
+        /// <param name="content">Contenido a incluir en el Bitmap.</param>
+        /// <returns>Bitmap con el contenido
+        /// codificado en un código QR.</returns>
+        public static byte[] GetQr(string content)
         {
 
-            var d = Convert.ToDouble(value);
+            byte[] result = null;
 
-            return d.ToString(new NumberFormatInfo());            
+            Dictionary<EncodeHintType, object> hints = new Dictionary<EncodeHintType, object>();
+            hints.Add(EncodeHintType.CHARACTER_SET, "ISO-8859-1");
+            hints.Add(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
+
+            try
+            {
+
+                QRCodeWriter qc = new QRCodeWriter();
+                ByteMatrix bm = qc.Encode(content, 1, 1, hints);
+
+                QrBitmap qrBm = new QrBitmap(bm);
+
+                result = qrBm.GetBytes();
+
+            }
+            catch (WriterException ex)
+            {
+
+                Utils.Throw($"Error en QrCodeGenerator.GetQr: {ex.Message}", ex); 
+
+            }
+
+            return result;
 
         }
 
-        #endregion
 
     }
 

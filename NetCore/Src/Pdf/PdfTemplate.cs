@@ -39,10 +39,7 @@
 
 using DECa.Pdf.Core;
 using DECa.Pdf.Forms;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Globalization;
 
 namespace DECa.Pdf

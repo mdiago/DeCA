@@ -37,8 +37,6 @@
     address: info@irenesolutions.com
  */
 
-using System;
-
 namespace DECa.Common
 {
     internal class DECaException : Exception

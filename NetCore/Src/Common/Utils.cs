@@ -39,7 +39,6 @@
 
 using DECa.Config;
 using DECa.Net.Rest;
-using System;
 
 namespace DECa.Common
 {
