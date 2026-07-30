@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Common
+namespace DeCA.Common
 {
     internal class DECaException : Exception
     {
@@ -59,7 +59,7 @@ namespace DECa.Common
         #region Construtores de Instancia
 
         /// <summary>
-        /// Representa una excepción en DECa.
+        /// Representa una excepción en DeCA.
         /// </summary>
         /// <param name="msg"> Mensaje.</param>
         /// <param name="ex"> Excepción de orígen.</param>

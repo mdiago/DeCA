@@ -39,12 +39,12 @@
 
 using System.Xml.Serialization;
 
-namespace DECa.Config
+namespace DeCA.Config
 {
 
     /// <summary>
     /// Opciones de configuración relacionadas con el
-    /// API REST de DECa.
+    /// API REST de DeCA.
     /// </summary>
     public class DECaSettings
     {

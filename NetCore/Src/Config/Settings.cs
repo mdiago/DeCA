@@ -37,8 +37,8 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Common;
-using DECa.Net.Rest;
+using DeCA.Common;
+using DeCA.Net.Rest;
 using System.Globalization;
 using System.Net.NetworkInformation;
 #if !LE_461
@@ -46,7 +46,7 @@ using System.Runtime.InteropServices;
 #endif
 using System.Xml.Serialization;
 
-namespace DECa.Config
+namespace DeCA.Config
 {
 
     /// <summary>
@@ -313,7 +313,7 @@ namespace DECa.Config
         public bool LoggingEnabled { get; set; }
 
         /// <summary>
-        /// Configuración API REST DECa.
+        /// Configuración API REST DeCA.
         /// </summary>
         [XmlElement("DECaSettings")]
         public DECaSettings DECaSettings { get; set; }

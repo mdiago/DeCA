@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Net.Rest.List
+namespace DeCA.Net.Rest.List
 {
     /// <summary>
     /// Representa un filtro para recuperar

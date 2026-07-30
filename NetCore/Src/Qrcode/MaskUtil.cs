@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <author>satorux@google.com (Satoru Takabayashi) - creator</author>

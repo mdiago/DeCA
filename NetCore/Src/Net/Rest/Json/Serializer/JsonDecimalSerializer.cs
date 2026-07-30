@@ -39,7 +39,7 @@
 
 using System.Globalization;
 
-namespace DECa.Net.Rest.Json.Serializer
+namespace DeCA.Net.Rest.Json.Serializer
 {
 
     /// <summary>

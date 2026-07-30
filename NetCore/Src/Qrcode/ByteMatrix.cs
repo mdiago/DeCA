@@ -39,7 +39,7 @@
 
 using System.Text;
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <summary>A class which wraps a 2D array of bytes.</summary>

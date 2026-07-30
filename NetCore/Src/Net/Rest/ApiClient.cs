@@ -40,15 +40,15 @@
 using System.Dynamic;
 using System.Net;
 using System.Text;
-using DECa.Business;
-using DECa.Common;
-using DECa.Config;
-using DECa.Net.Rest.Json.Kivu;
-using DECa.Net.Rest.Json.Parser;
-using DECa.Net.Rest.List;
+using DeCA.Business;
+using DeCA.Common;
+using DeCA.Config;
+using DeCA.Net.Rest.Json.Kivu;
+using DeCA.Net.Rest.Json.Parser;
+using DeCA.Net.Rest.List;
 
 
-namespace DECa.Net.Rest
+namespace DeCA.Net.Rest
 {
 
     /// <summary>

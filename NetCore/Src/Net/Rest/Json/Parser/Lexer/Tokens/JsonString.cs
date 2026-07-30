@@ -39,7 +39,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace DECa.Net.Rest.Json.Parser.Lexer.Tokens
+namespace DeCA.Net.Rest.Json.Parser.Lexer.Tokens
 {
 
     /// <summary>

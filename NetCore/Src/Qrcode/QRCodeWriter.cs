@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <summary>This object renders a QR Code as a ByteMatrix 2D array of greyscale values.</summary>

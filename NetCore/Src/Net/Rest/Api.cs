@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Net.Rest
+namespace DeCA.Net.Rest
 {
 
     /// <summary>
@@ -90,7 +90,7 @@ namespace DECa.Net.Rest
         public string EndPointGetRecords { get; set; }
 
         /// <summary>
-        /// Endpoint consulta registros en DECa.
+        /// Endpoint consulta registros en DeCA.
         /// </summary>
         public string EndPointGetDECaInvoices { get; set; }
 

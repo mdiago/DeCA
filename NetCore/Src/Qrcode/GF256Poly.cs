@@ -39,7 +39,7 @@
 
 using System.Text;
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <summary>Represents a polynomial whose coefficients are elements of GF(256).</summary>

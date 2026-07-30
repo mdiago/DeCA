@@ -39,7 +39,7 @@
 
 using System.Text;
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <author>satorux@google.com (Satoru Takabayashi) - creator</author>

@@ -37,100 +37,101 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Net.Rest.Json.Kivu;
+using DeCA.Net.Rest.Json.Kivu;
 
-namespace DECa.Business
+namespace DeCA.Business
 {
-
     /// <summary>
-    /// Representa un documento en el sistema DECa.
+    /// Representa un interlocutor en un proceso de negocio.
+    /// principales.
     /// </summary>
-    public class Document : JsonSerializableKivu
+    public class Party : JsonSerializableKivu
     {
 
-        #region Variables Privadas de Instancia
+        #region Public Properties
 
         /// <summary>
-        /// Suma de las bases imponibles.
-        /// </summary>   
-        decimal _NetAmount;
-
-
-        #endregion
-
-        #region Construtores de Instancia
-
-        /// <summary>
-        /// Constructor.
+        /// <para>'CC': Cargador contractual.</para>
+        /// <para>'TE': Transportista efectivo.</para>
+        /// <para>'EX': Expedidor o cargador efectivo.</para>
+        /// <para>'DS': Destinatario de la mercancía.</para>
+        /// <para>'OR': Lugar, establecimiento o interlocutor de origen.</para>
+        /// <para>'DE': Lugar, establecimiento o interlocutor de destino.</para>
+        /// <para>'OT': Otros.</para>
         /// </summary>
-        public Document() 
-        {
-        }
-
-        #endregion
-
-
-        #region Propiedades Públicas de Instancia
+        public string PartyRole { get; set; }
 
         /// <summary>
-        /// <para> Identificador único del documento electrónico de control.</para>
+        /// Identificador del interlocutor de negocio.
         /// </summary>
-        public string DeCAID { get; set; }
+        public string PartyID { get; set; }
 
         /// <summary>
-        /// Número de versión del documento.
+        /// Nombre asignado al interlocutor.
+        /// </summary>        
+        public string FullName { get; set; }
+
+        /// <summary>
+        /// Código de identificación fiscal.
+        /// </summary>        
+        public string TaxID { get; set; }
+
+        /// <summary>
+        /// Dirección.
+        /// </summary>        
+        public string Address { get; set; }
+
+        /// <summary>
+        /// Población.
+        /// </summary>        
+        public string City { get; set; }
+
+        /// <summary>
+        /// Código postal.
+        /// </summary>        
+        public string PostalCode { get; set; }
+
+        /// <summary>
+        /// Código región: Ej. provincia.
+        /// </summary>        
+        public string Region { get; set; }
+
+        /// <summary>
+        /// Código país ISO-3166 (EJ. ES).
+        /// </summary>        
+        public string CountryID { get; set; }
+
+        /// <summary>
+        /// Dirección de correo principal.
         /// </summary>
-        public int Version { get; set; }
+        public string Mail { get; set; }
+
+        /// <summary>
+        /// Número de teléfono movil.
+        /// </summary>
+        public string Mobile { get; set; }
+
+        /// <summary>
+        /// Número de teléfono fijo.
+        /// </summary>
+        public string Phone { get; set; }
 
         /// <summary>
         /// Identificador del estado del documento.
-        /// </summary>
+        /// </summary>        
         public string Status { get; set; }
 
-        /// <summary>
-        /// Fecha y hora de creación del documento.
-        /// </summary>
-        public DateTime CreationDateTime { get; set; }
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
-        /// Fecha y hora de la última modificación del documento.
+        /// Representacion textual del interlocutor de negocio.
         /// </summary>
-        public DateTime? ModificationDateTime { get; set; }
-
-        /// <summary>
-        /// Fecha y hora de emisión definitiva del documento.
-        /// Debe ser anterior al inicio efectivo del transporte.
-        /// </summary>
-        public DateTime? IssueDateTime { get; set; }
-
-        /// <summary>
-        /// Fecha prevista o efectiva del transporte.
-        /// </summary>
-        public DateTime TransportDate { get; set; }
-
-        /// <summary>
-        /// Fecha y hora de inicio efectivo del transporte.
-        /// </summary>
-        public DateTime? TransportStartDateTime { get; set; }
-
-        /// <summary>
-        /// Fecha y hora de finalización del transporte.
-        /// </summary>
-        public DateTime? TransportEndDateTime { get; set; }
-
-        #endregion     
-
-        #region Métodos Públicos de Instancia      
-
-        /// <summary>
-        /// Representación textual de la instancia.
-        /// </summary>
-        /// <returns> Representación textual de la instancia.</returns>
+        /// <returns>Representacion textual del interlocutor de negocio.</returns>
         public override string ToString()
         {
-
-            return $"{DeCAID}";
-
+            return $"{FullName}, {TaxID}";
         }
 
         #endregion

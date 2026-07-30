@@ -40,7 +40,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace DECa.Pdf.Core
+namespace DeCA.Pdf.Core
 {
     /// <summary>
     /// Parser PDF mínimo orientado a documentos controlados con AcroForm.

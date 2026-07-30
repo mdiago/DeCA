@@ -39,7 +39,7 @@
 
 using System.Text;
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <summary>Represents a 2D matrix of bits.</summary>

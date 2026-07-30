@@ -37,9 +37,9 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Net.Rest.Json;
+using DeCA.Net.Rest.Json;
 
-namespace DECa.Net.Rest.List
+namespace DeCA.Net.Rest.List
 {
     /// <summary>
     /// Representa una oparación a realizar en un campo.

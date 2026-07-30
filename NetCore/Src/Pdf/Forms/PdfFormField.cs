@@ -37,9 +37,9 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Pdf.Core;
+using DeCA.Pdf.Core;
 
-namespace DECa.Pdf.Forms
+namespace DeCA.Pdf.Forms
 {
 
     /// <summary>

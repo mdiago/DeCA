@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Net.Rest.Json.Parser.Lexer.Tokens
+namespace DeCA.Net.Rest.Json.Parser.Lexer.Tokens
 {
 
     /// <summary>

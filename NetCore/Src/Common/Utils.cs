@@ -37,10 +37,10 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Config;
-using DECa.Net.Rest;
+using DeCA.Config;
+using DeCA.Net.Rest;
 
-namespace DECa.Common
+namespace DeCA.Common
 {
 
     /// <summary>

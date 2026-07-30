@@ -38,9 +38,9 @@
  */
 
 using System.Reflection;
-using DECa.Net.Rest.Json.Parser.Lexer.Tokens;
+using DeCA.Net.Rest.Json.Parser.Lexer.Tokens;
 
-namespace DECa.Net.Rest.Json.Parser.Lexer
+namespace DeCA.Net.Rest.Json.Parser.Lexer
 {
 
     /// <summary>

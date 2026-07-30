@@ -37,12 +37,12 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Pdf.Core;
-using DECa.Pdf.Images;
+using DeCA.Pdf.Core;
+using DeCA.Pdf.Images;
 using System.Globalization;
 using System.Text;
 
-namespace DECa.Pdf.Appearance
+namespace DeCA.Pdf.Appearance
 {
 
     /// <summary>

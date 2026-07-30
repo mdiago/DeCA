@@ -38,9 +38,9 @@
  */
 
 using System.Text;
-using DECa.Config;
+using DeCA.Config;
 
-namespace DECa.Common
+namespace DeCA.Common
 {
 
     /// <summary>

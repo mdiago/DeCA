@@ -40,7 +40,7 @@
 using System.Reflection;
 using System.Xml.Serialization;
 
-namespace DECa.Net.Rest.Json.Serializer
+namespace DeCA.Net.Rest.Json.Serializer
 {
 
     /// <summary>

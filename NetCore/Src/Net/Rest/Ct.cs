@@ -37,12 +37,12 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Common;
-using DECa.Config;
-using DECa.Net.Rest.Json.Kivu;
+using DeCA.Common;
+using DeCA.Config;
+using DeCA.Net.Rest.Json.Kivu;
 using System.Reflection;
 
-namespace DECa.Net.Rest
+namespace DeCA.Net.Rest
 {
 
     /// <summary>

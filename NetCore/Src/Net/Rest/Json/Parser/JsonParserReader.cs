@@ -38,10 +38,10 @@
  */
 
 using System.Dynamic;
-using DECa.Net.Rest.Json.Parser.Lexer;
-using DECa.Net.Rest.Json.Parser.Lexer.Tokens;
+using DeCA.Net.Rest.Json.Parser.Lexer;
+using DeCA.Net.Rest.Json.Parser.Lexer.Tokens;
 
-namespace DECa.Net.Rest.Json.Parser
+namespace DeCA.Net.Rest.Json.Parser
 {
 
     /// <summary>

@@ -39,7 +39,7 @@
 
 using System.Text;
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <summary>A simple, fast array of bits, represented compactly by an array of ints internally.</summary>

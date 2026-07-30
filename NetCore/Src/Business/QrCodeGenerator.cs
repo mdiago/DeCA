@@ -37,11 +37,11 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Qrcode.Exceptions;
-using DECa.Qrcode;
-using DECa.Common;
+using DeCA.Qrcode.Exceptions;
+using DeCA.Qrcode;
+using DeCA.Common;
 
-namespace DeCA.Bussiness
+namespace DeCA.Business
 {
 
     /// <summary>

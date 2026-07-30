@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Qrcode.Exceptions
+namespace DeCA.Qrcode.Exceptions
 {
 
     /// <summary>

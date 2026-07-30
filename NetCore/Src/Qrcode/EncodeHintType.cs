@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Qrcode 
+namespace DeCA.Qrcode 
 {
     
     /// <summary>These are a set of hints that you may pass to Writers to specify their behavior.</summary>

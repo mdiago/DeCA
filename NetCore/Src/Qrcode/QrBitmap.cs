@@ -36,7 +36,7 @@
     For more information, please contact Irene Solutions SL. at this
     address: info@irenesolutions.com
  */
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <summary>

@@ -40,7 +40,7 @@
 using System.Reflection;
 using System.Text;
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <summary>

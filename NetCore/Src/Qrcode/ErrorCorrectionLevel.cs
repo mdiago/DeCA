@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Qrcode
+namespace DeCA.Qrcode
 {
 
     /// <summary>See ISO 18004:2006, 6.5.1.</summary>

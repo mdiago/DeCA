@@ -39,7 +39,7 @@
 
 using System.Reflection;
 
-namespace DECa.Net.Rest.Json.Kivu
+namespace DeCA.Net.Rest.Json.Kivu
 {
 
     /// <summary>
@@ -68,7 +68,7 @@ namespace DECa.Net.Rest.Json.Kivu
         /// <summary>
         /// Clave de acceso al API REST para DECa de
         /// Irene Solutions. Puede conseguir su clave en
-        /// https://facturae.irenesolutions.com/face/go
+        /// https://facturae.irenesolutions.com/deca/go
         /// </summary>
         public string ServiceKey { get; set; }
 

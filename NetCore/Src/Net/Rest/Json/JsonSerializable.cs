@@ -37,12 +37,12 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Net.Rest.Json.Serializer;
+using DeCA.Net.Rest.Json.Serializer;
 using System.Collections;
 using System.Reflection;
 using System.Text;
 
-namespace DECa.Net.Rest.Json
+namespace DeCA.Net.Rest.Json
 {
 
     /// <summary>

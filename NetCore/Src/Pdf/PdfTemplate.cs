@@ -37,14 +37,14 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Pdf.Appearance;
-using DECa.Pdf.Core;
-using DECa.Pdf.Forms;
-using DECa.Pdf.Images;
+using DeCA.Pdf.Appearance;
+using DeCA.Pdf.Core;
+using DeCA.Pdf.Forms;
+using DeCA.Pdf.Images;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
-namespace DECa.Pdf
+namespace DeCA.Pdf
 {
 
     /// <summary>
@@ -193,7 +193,7 @@ namespace DECa.Pdf
         }
 
         /// <summary>
-        /// Aplica los metadatos propios de los documentos generados por DECa.
+        /// Aplica los metadatos propios de los documentos generados por DeCA.
         /// </summary>
         /// <param name="writer">Escritor de la nueva revisión incremental.</param>
         private void ApplyDocumentInformation(PdfWriter writer)
@@ -202,10 +202,10 @@ namespace DECa.Pdf
                 _documentInformation = new PdfDictionary();
 
             DateTimeOffset now = DateTimeOffset.Now;
-            _documentInformation.Set("Title", PdfWriter.CreateUnicodeString("DECa"));
-            _documentInformation.Set("Author", PdfWriter.CreateUnicodeString("DECa"));
-            _documentInformation.Set("Subject", PdfWriter.CreateUnicodeString("DECa"));
-            _documentInformation.Set("Producer", PdfWriter.CreateUnicodeString("DECa"));
+            _documentInformation.Set("Title", PdfWriter.CreateUnicodeString("DeCA by Irene Solutions"));
+            _documentInformation.Set("Author", PdfWriter.CreateUnicodeString("DeCA Irene Solutions"));
+            _documentInformation.Set("Subject", PdfWriter.CreateUnicodeString("DeCA"));
+            _documentInformation.Set("Producer", PdfWriter.CreateUnicodeString("DeCA by Irene Solutions"));
 
             if (_documentInformation.Get("CreationDate") == null)
                 _documentInformation.Set("CreationDate",

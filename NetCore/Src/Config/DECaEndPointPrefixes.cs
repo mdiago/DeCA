@@ -37,7 +37,7 @@
     address: info@irenesolutions.com
  */
 
-namespace DECa.Config
+namespace DeCA.Config
 {
 
     /// <summary>

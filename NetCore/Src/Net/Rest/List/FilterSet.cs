@@ -37,9 +37,9 @@
     address: info@irenesolutions.com
  */
 
-using DECa.Net.Rest.Json.Kivu;
+using DeCA.Net.Rest.Json.Kivu;
 
-namespace DECa.Net.Rest.List
+namespace DeCA.Net.Rest.List
 {
     /// <summary>
     /// Representa un conjunto de filtros.
