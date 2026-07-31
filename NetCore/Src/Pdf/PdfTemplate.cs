@@ -339,6 +339,45 @@ namespace DeCA.Pdf
 
 
         /// <summary>
+        /// Comprueba que un campo puede recibir un valor lógico.
+        /// </summary>
+        /// <param name="field">Campo que se desea modificar.</param>
+        private void ValidateBooleanValue(PdfFormField field)
+        {
+            if (field.IsReadOnly)
+                throw new InvalidOperationException(
+                    $"El campo '{field.Name}' está marcado como de solo lectura.");
+
+            if (field.FieldType != PdfFormFieldType.CheckBox)
+                throw new InvalidOperationException(
+                    $"El campo '{field.Name}' no admite valores lógicos.");
+        }
+
+        /// <summary>
+        /// Obtiene el nombre del estado activo definido en la apariencia normal
+        /// de un campo de tipo casilla de verificación.
+        /// </summary>
+        /// <param name="field">Campo cuya apariencia se desea examinar.</param>
+        /// <returns>Nombre PDF del estado activo.</returns>
+        private string GetCheckBoxOnState(PdfFormField field)
+        {
+            PdfDictionary appearances = _parser.ResolveDictionary(field.Dictionary.Get("AP"));
+            PdfDictionary normalAppearance = appearances == null ?
+                null : _parser.ResolveDictionary(appearances.Get("N"));
+
+            if (normalAppearance != null)
+            {
+                foreach (KeyValuePair<string, PdfObject> item in normalAppearance.Items)
+                {
+                    if (!string.Equals(item.Key, "Off", StringComparison.Ordinal))
+                        return item.Key;
+                }
+            }
+
+            return "Yes";
+        }
+
+        /// <summary>
         /// Crea y aplica las apariencias de imagen pendientes para los campos de botón.
         /// </summary>
         /// <param name="writer">Escritor de la nueva revisión incremental.</param>
@@ -575,6 +614,37 @@ namespace DeCA.Pdf
 
                 ValidateTextValue(field);
                 field.SetValue(value);
+            }
+
+            /// <summary>
+            /// Establece en memoria el valor lógico de una casilla de verificación AcroForm.
+            /// El valor se incorporará al documento al invocar Save o GetBytes.
+            /// </summary>
+            /// <param name="fieldName">Nombre completo del campo.</param>
+            /// <param name="value">Verdadero para marcar la casilla; falso para desmarcarla.</param>
+            /// <exception cref="ArgumentException">El nombre está vacío.</exception>
+            /// <exception cref="KeyNotFoundException">El campo no existe.</exception>
+            /// <exception cref="InvalidOperationException">
+            /// El campo es de solo lectura o no es una casilla de verificación.
+            /// </exception>
+            public void SetValue(string fieldName, bool value)
+            {
+                if (string.IsNullOrWhiteSpace(fieldName))
+                    throw new ArgumentException("Debe indicar el nombre del campo.", nameof(fieldName));
+
+                PdfFormField field = GetField(fieldName);
+                if (field == null)
+                    throw new KeyNotFoundException(
+                        $"No se encontró el campo AcroForm '{fieldName}'.");
+
+                ValidateBooleanValue(field);
+
+                string state = value ? GetCheckBoxOnState(field) : "Off";
+                PdfName pdfState = new PdfName(state);
+
+                field.Dictionary.Set("V", pdfState);
+                field.Dictionary.Set("AS", pdfState);
+                field.SetModified();
             }
 
             /// <summary>

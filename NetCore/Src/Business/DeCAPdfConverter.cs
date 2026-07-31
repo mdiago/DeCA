@@ -64,8 +64,11 @@ namespace DeCA.Business
 
                         if(p.PropertyType == typeof(string))
                             _PdfTemplate.SetValue(name, $"{value}");
-                        //else (p.PropertyType == typeof(bool))
-                        //    _PdfTemplate.SetValue(name,value);
+                        else if (p.PropertyType == typeof(bool))
+                            _PdfTemplate.SetValue(name, (bool)value);
+                        else if (p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTime?))
+                            _PdfTemplate.SetValue(name, $"{value:yyyy-MM-dd HH:mm:ss}");
+
                     }
                     else 
                     {
@@ -90,8 +93,7 @@ namespace DeCA.Business
                     }
 
                     // Inserto Qr
-                    var url = "https://www.irenesolutions.com";
-                    var buffBm = QrCodeGenerator.GetQr(url);
+                    var buffBm = QrCodeGenerator.GetQr(_Document.QRCodeValue);
 
                     _PdfTemplate.SetButtonImage(
                         "QRCodeImage",
