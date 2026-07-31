@@ -43,6 +43,8 @@ using DeCA.Pdf.Forms;
 using DeCA.Pdf.Images;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Reflection;
+using System.Resources;
 
 namespace DeCA.Pdf
 {
@@ -501,7 +503,38 @@ namespace DeCA.Pdf
             }
         }
 
-        #endregion
+        /// <summary>
+        /// Abre la plantilla PDF por defecto incluida como recurso embebido.
+        /// </summary>
+        /// <returns>Plantilla PDF por defecto.</returns>
+        /// <exception cref="InvalidOperationException">
+        /// No se encuentra la plantilla PDF embebida.
+        /// </exception>
+        public static PdfTemplate Load()
+        {
+            const string resourceName = "DeCA.Resources.DeCA_DEFAULT.pdf";
+
+            Assembly assembly = typeof(PdfTemplate).Assembly;
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                {
+                    throw new InvalidOperationException(
+                        $"No se encuentra el recurso embebido '{resourceName}'.");
+                }
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    stream.CopyTo(memoryStream);
+
+                    return new PdfTemplate(memoryStream.ToArray());
+                }
+            }
+        }
+
+
+    #endregion
 
         #region Métodos Públicos de Instancia
 
@@ -511,135 +544,135 @@ namespace DeCA.Pdf
         /// <param name="name">Nombre completo del campo.</param>
         /// <returns>Campo encontrado o null cuando no existe.</returns>
         public PdfFormField GetField(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-                return null;
-
-            _fieldsByName.TryGetValue(name, out PdfFormField field);
-            return field;
-        }
-
-        /// <summary>
-        /// Establece en memoria el valor textual de un campo AcroForm.
-        /// El valor se incorporará al documento al invocar Save o GetBytes.
-        /// </summary>
-        /// <param name="fieldName">Nombre completo del campo.</param>
-        /// <param name="value">Nuevo valor del campo.</param>
-        /// <exception cref="ArgumentException">El nombre está vacío.</exception>
-        /// <exception cref="KeyNotFoundException">El campo no existe.</exception>
-        /// <exception cref="InvalidOperationException">
-        /// El campo es de solo lectura o no admite valores textuales.
-        /// </exception>
-        public void SetValue(string fieldName, string value)
-        {
-            if (string.IsNullOrWhiteSpace(fieldName))
-                throw new ArgumentException("Debe indicar el nombre del campo.", nameof(fieldName));
-
-            PdfFormField field = GetField(fieldName);
-            if (field == null)
-                throw new KeyNotFoundException(
-                    $"No se encontró el campo AcroForm '{fieldName}'.");
-
-            ValidateTextValue(field);
-            field.SetValue(value);
-        }
-
-        /// <summary>
-        /// Establece la imagen BMP que se mostrará como apariencia normal de un campo botón.
-        /// </summary>
-        /// <param name="fieldName">Nombre completo del campo de formulario.</param>
-        /// <param name="bitmap">Contenido binario de una imagen BMP BI_RGB de 24 o 32 bits.</param>
-        /// <exception cref="ArgumentException">El nombre está vacío, el BMP no es válido o el campo no es un botón.</exception>
-        /// <exception cref="ArgumentNullException">La imagen es nula.</exception>
-        /// <exception cref="KeyNotFoundException">No existe el campo indicado.</exception>
-        public void SetButtonImage(string fieldName, byte[] bitmap)
-        {
-            if (string.IsNullOrWhiteSpace(fieldName))
-                throw new ArgumentException("Debe indicar el nombre del campo.", nameof(fieldName));
-            if (bitmap == null)
-                throw new ArgumentNullException(nameof(bitmap));
-
-            PdfFormField field = GetField(fieldName);
-            if (field == null)
-                throw new KeyNotFoundException(
-                    $"No existe ningún campo PDF con el nombre '{fieldName}'.");
-            if (field.FieldType != PdfFormFieldType.PushButton)
-                throw new ArgumentException(
-                    $"El campo '{fieldName}' no es un botón de tipo PushButton.", nameof(fieldName));
-
-            _buttonImages[fieldName] = PdfBitmap.Load((byte[])bitmap.Clone());
-        }
-
-        /// <summary>
-        /// Establece la imagen BMP que se mostrará como apariencia normal de un campo botón.
-        /// </summary>
-        /// <param name="fieldName">Nombre completo del campo de formulario.</param>
-        /// <param name="bitmap">Stream que contiene una imagen BMP BI_RGB de 24 o 32 bits.</param>
-        /// <exception cref="ArgumentNullException">El stream es nulo.</exception>
-        public void SetButtonImage(string fieldName, Stream bitmap)
-        {
-            if (bitmap == null)
-                throw new ArgumentNullException(nameof(bitmap));
-
-            using (MemoryStream memory = new MemoryStream())
             {
-                bitmap.CopyTo(memory);
-                SetButtonImage(fieldName, memory.ToArray());
+                if (string.IsNullOrEmpty(name))
+                    return null;
+
+                _fieldsByName.TryGetValue(name, out PdfFormField field);
+                return field;
             }
-        }
 
-        /// <summary>
-        /// Marca todos los campos AcroForm como de solo lectura.
-        /// </summary>
-        public void LockFields()
-        {
-            foreach (PdfFormField field in _fields)
-                field.SetReadOnly();
-        }
+            /// <summary>
+            /// Establece en memoria el valor textual de un campo AcroForm.
+            /// El valor se incorporará al documento al invocar Save o GetBytes.
+            /// </summary>
+            /// <param name="fieldName">Nombre completo del campo.</param>
+            /// <param name="value">Nuevo valor del campo.</param>
+            /// <exception cref="ArgumentException">El nombre está vacío.</exception>
+            /// <exception cref="KeyNotFoundException">El campo no existe.</exception>
+            /// <exception cref="InvalidOperationException">
+            /// El campo es de solo lectura o no admite valores textuales.
+            /// </exception>
+            public void SetValue(string fieldName, string value)
+            {
+                if (string.IsNullOrWhiteSpace(fieldName))
+                    throw new ArgumentException("Debe indicar el nombre del campo.", nameof(fieldName));
 
-        /// <summary>
-        /// Guarda el documento PDF incluyendo los valores modificados.
-        /// </summary>
-        /// <param name="fileName">Ruta del archivo PDF de destino.</param>
-        /// <param name="lockFields">Indica si los campos deben quedar bloqueados. El valor predeterminado es true.</param>
-        /// <exception cref="ArgumentException">La ruta está vacía.</exception>
-        public void Save(string fileName, bool lockFields = true)
-        {
-            if (string.IsNullOrWhiteSpace(fileName))
-                throw new ArgumentException("Debe indicar el archivo PDF de destino.", nameof(fileName));
+                PdfFormField field = GetField(fieldName);
+                if (field == null)
+                    throw new KeyNotFoundException(
+                        $"No se encontró el campo AcroForm '{fieldName}'.");
 
-            File.WriteAllBytes(fileName, CreateUpdatedDocument(lockFields));
-        }
+                ValidateTextValue(field);
+                field.SetValue(value);
+            }
 
-        /// <summary>
-        /// Guarda el documento PDF incluyendo los valores modificados en un stream.
-        /// </summary>
-        /// <param name="stream">Stream de destino.</param>
-        /// <param name="lockFields">Indica si los campos deben quedar bloqueados. El valor predeterminado es true.</param>
-        /// <exception cref="ArgumentNullException">El stream es null.</exception>
-        public void Save(Stream stream, bool lockFields = true)
-        {
-            if (stream == null)
-                throw new ArgumentNullException(nameof(stream));
+            /// <summary>
+            /// Establece la imagen BMP que se mostrará como apariencia normal de un campo botón.
+            /// </summary>
+            /// <param name="fieldName">Nombre completo del campo de formulario.</param>
+            /// <param name="bitmap">Contenido binario de una imagen BMP BI_RGB de 24 o 32 bits.</param>
+            /// <exception cref="ArgumentException">El nombre está vacío, el BMP no es válido o el campo no es un botón.</exception>
+            /// <exception cref="ArgumentNullException">La imagen es nula.</exception>
+            /// <exception cref="KeyNotFoundException">No existe el campo indicado.</exception>
+            public void SetButtonImage(string fieldName, byte[] bitmap)
+            {
+                if (string.IsNullOrWhiteSpace(fieldName))
+                    throw new ArgumentException("Debe indicar el nombre del campo.", nameof(fieldName));
+                if (bitmap == null)
+                    throw new ArgumentNullException(nameof(bitmap));
 
-            byte[] pdf = CreateUpdatedDocument(lockFields);
-            stream.Write(pdf, 0, pdf.Length);
-        }
+                PdfFormField field = GetField(fieldName);
+                if (field == null)
+                    throw new KeyNotFoundException(
+                        $"No existe ningún campo PDF con el nombre '{fieldName}'.");
+                if (field.FieldType != PdfFormFieldType.PushButton)
+                    throw new ArgumentException(
+                        $"El campo '{fieldName}' no es un botón de tipo PushButton.", nameof(fieldName));
 
-        /// <summary>
-        /// Obtiene el documento PDF incluyendo los valores modificados.
-        /// </summary>
-        /// <param name="lockFields">Indica si los campos deben quedar bloqueados. El valor predeterminado es true.</param>
-        /// <returns>Contenido binario del documento actualizado.</returns>
-        public byte[] GetBytes(bool lockFields = true) => CreateUpdatedDocument(lockFields);
+                _buttonImages[fieldName] = PdfBitmap.Load((byte[])bitmap.Clone());
+            }
 
-        /// <summary>
-        /// Devuelve una copia exacta del PDF original sin aplicar modificaciones.
-        /// </summary>
-        /// <returns>Copia del contenido binario original.</returns>
-        public byte[] GetSourceBytes() => (byte[])_source.Clone();
+            /// <summary>
+            /// Establece la imagen BMP que se mostrará como apariencia normal de un campo botón.
+            /// </summary>
+            /// <param name="fieldName">Nombre completo del campo de formulario.</param>
+            /// <param name="bitmap">Stream que contiene una imagen BMP BI_RGB de 24 o 32 bits.</param>
+            /// <exception cref="ArgumentNullException">El stream es nulo.</exception>
+            public void SetButtonImage(string fieldName, Stream bitmap)
+            {
+                if (bitmap == null)
+                    throw new ArgumentNullException(nameof(bitmap));
 
-        #endregion
+                using (MemoryStream memory = new MemoryStream())
+                {
+                    bitmap.CopyTo(memory);
+                    SetButtonImage(fieldName, memory.ToArray());
+                }
+            }
+
+            /// <summary>
+            /// Marca todos los campos AcroForm como de solo lectura.
+            /// </summary>
+            public void LockFields()
+            {
+                foreach (PdfFormField field in _fields)
+                    field.SetReadOnly();
+            }
+
+            /// <summary>
+            /// Guarda el documento PDF incluyendo los valores modificados.
+            /// </summary>
+            /// <param name="fileName">Ruta del archivo PDF de destino.</param>
+            /// <param name="lockFields">Indica si los campos deben quedar bloqueados. El valor predeterminado es true.</param>
+            /// <exception cref="ArgumentException">La ruta está vacía.</exception>
+            public void Save(string fileName, bool lockFields = true)
+            {
+                if (string.IsNullOrWhiteSpace(fileName))
+                    throw new ArgumentException("Debe indicar el archivo PDF de destino.", nameof(fileName));
+
+                File.WriteAllBytes(fileName, CreateUpdatedDocument(lockFields));
+            }
+
+            /// <summary>
+            /// Guarda el documento PDF incluyendo los valores modificados en un stream.
+            /// </summary>
+            /// <param name="stream">Stream de destino.</param>
+            /// <param name="lockFields">Indica si los campos deben quedar bloqueados. El valor predeterminado es true.</param>
+            /// <exception cref="ArgumentNullException">El stream es null.</exception>
+            public void Save(Stream stream, bool lockFields = true)
+            {
+                if (stream == null)
+                    throw new ArgumentNullException(nameof(stream));
+
+                byte[] pdf = CreateUpdatedDocument(lockFields);
+                stream.Write(pdf, 0, pdf.Length);
+            }
+
+            /// <summary>
+            /// Obtiene el documento PDF incluyendo los valores modificados.
+            /// </summary>
+            /// <param name="lockFields">Indica si los campos deben quedar bloqueados. El valor predeterminado es true.</param>
+            /// <returns>Contenido binario del documento actualizado.</returns>
+            public byte[] GetBytes(bool lockFields = true) => CreateUpdatedDocument(lockFields);
+
+            /// <summary>
+            /// Devuelve una copia exacta del PDF original sin aplicar modificaciones.
+            /// </summary>
+            /// <returns>Copia del contenido binario original.</returns>
+            public byte[] GetSourceBytes() => (byte[])_source.Clone();
+
+            #endregion
 
     }
 

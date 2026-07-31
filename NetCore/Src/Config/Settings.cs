@@ -204,6 +204,8 @@ namespace DeCA.Config
             {
                 InstallationNumber = installationNumber,
                 LogPath = $"{Path}Log{_PathSep}",
+                JsonPath = $"{Path}Json{_PathSep}",
+                PdfPath = $"{Path}Pdf{_PathSep}",
                 CertificateSerial = "",
                 CertificateThumbprint = "",
                 CertificatePath = "",
@@ -272,6 +274,21 @@ namespace DeCA.Config
         /// </summary>
         [XmlElement("LogPath")]
         public string LogPath { get; set; }
+
+        /// <summary>
+        /// Ruta al directorio que actuará almacenamiento
+        /// de archios json de instancias de la clase Document.
+        /// </summary>
+        [XmlElement("JsonPath")]
+        public string JsonPath { get; set; }
+
+        /// <summary>
+        /// Ruta al directorio que actuará almacenamiento
+        /// de archivs pdf definitivos de DeCA.
+        /// </summary>
+        [XmlElement("PdfPath")]
+        public string PdfPath { get; set; }
+
 
         /// <summary>
         /// Número de serie del certificado a utilizar. Mediante este número

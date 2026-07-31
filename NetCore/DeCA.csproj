@@ -12,4 +12,10 @@
     <Content Include="img\DeCA.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DeCA_DEFAULT.pdf">
+      <LogicalName>DeCA.Resources.DeCA_DEFAULT.pdf</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  
 </Project>

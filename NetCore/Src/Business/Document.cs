@@ -52,6 +52,12 @@ namespace DeCA.Business
         #region Propiedades Públicas de Instancia
 
         /// <summary>
+        /// Identificador del interlocutor que representa a la empresa
+        /// propietaria del documento en el sistema de origen.
+        /// </summary>
+        public string OwnerPartyID { get; set; }
+
+        /// <summary>
         /// Identificador único del documento electrónico de control.
         /// </summary>
         public string DeCAID { get; set; }
