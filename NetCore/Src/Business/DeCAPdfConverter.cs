@@ -68,6 +68,12 @@ namespace DeCA.Business
                             _PdfTemplate.SetValue(name, (bool)value);
                         else if (p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTime?))
                             _PdfTemplate.SetValue(name, $"{value:yyyy-MM-dd HH:mm:ss}");
+                        else if (p.PropertyType == typeof(decimal)|| p.PropertyType == typeof(decimal?))
+                            _PdfTemplate.SetValue(name, $"{value:#,##0.00}");
+                        else if (p.PropertyType == typeof(int) || p.PropertyType == typeof(int?))
+                            _PdfTemplate.SetValue(name, $"{value:#,##0}");
+
+
 
                     }
                     else 
