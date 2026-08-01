@@ -14,6 +14,7 @@ using System.IO;
 Document document = new Document()
 {
     // Identificación del documento.
+    OwnerPartyID = "B12959755",
     DeCAID = "DECA-2026-000001",
     DocumentNumber = "DECA-2026-000001",
     Version = 0,
