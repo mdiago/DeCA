@@ -30,8 +30,8 @@
     develop commercial activities involving the DECa software without
     disclosing the source code of your own applications.
     These activities include: offering paid services to customers as an ASP,
-    serving DECa XML data on the fly in a web application, shipping DECa
-    with a closed source product.
+    serving DECa services on the fly in a web application, 
+    shipping DECa with a closed source product.
     
     For more information, please contact Irene Solutions SL. at this
     address: info@irenesolutions.com
@@ -39,7 +39,7 @@
 
 using DeCA.Net.Rest.Json.Kivu;
 
-namespace DeCA.Business
+namespace DeCA.Business.Data
 {
     /// <summary>
     /// Representa un interlocutor en un proceso de negocio.

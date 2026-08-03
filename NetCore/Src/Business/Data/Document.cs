@@ -39,7 +39,7 @@
 
 using DeCA.Net.Rest.Json.Kivu;
 
-namespace DeCA.Business
+namespace DeCA.Business.Data
 {
 
     /// <summary>

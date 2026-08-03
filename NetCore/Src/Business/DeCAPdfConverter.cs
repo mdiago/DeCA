@@ -1,10 +1,6 @@
 ﻿using DeCA.Common;
 using DeCA.Pdf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DeCA.Business.Data;
 
 namespace DeCA.Business
 {
@@ -118,7 +114,6 @@ namespace DeCA.Business
                     throw new Exception($"Error en TestPdfFromResourcesQr: {ex.Message}", ex);
 
                 }
-
 
             }
 

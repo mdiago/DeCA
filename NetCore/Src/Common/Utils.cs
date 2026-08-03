@@ -97,12 +97,12 @@ namespace DeCA.Common
             if (Settings.Current.LoggingEnabled)
                 Logger.Log(msg);
 
-            var faceException = new DECaException(msg, ex);
+            var deCAException = new DeCAException(msg, ex);
 
             if (Settings.Current.TlRuntime)
-                ApiClient.Ct(faceException.Log);
+                ApiClient.Ct(deCAException.Log);
 
-            throw faceException;
+            throw deCAException;
 
         }
 

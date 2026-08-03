@@ -39,7 +39,7 @@
 
 namespace DeCA.Common
 {
-    internal class DECaException : Exception
+    internal class DeCAException : Exception
     {
 
         #region Propiedades Privadas de Instacia
@@ -63,7 +63,7 @@ namespace DeCA.Common
         /// </summary>
         /// <param name="msg"> Mensaje.</param>
         /// <param name="ex"> Excepción de orígen.</param>
-        public DECaException(string msg, Exception ex) : base(msg, ex)
+        public DeCAException(string msg, Exception ex) : base(msg, ex)
         {
 
             var log = $"{msg}: {ex}";

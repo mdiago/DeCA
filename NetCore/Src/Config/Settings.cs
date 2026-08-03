@@ -75,9 +75,9 @@ namespace DeCA.Config
 		static readonly string _Path =
 #if !LE_461
             RuntimeInformation.IsOSPlatform(OSPlatform.Create("IOS")) || RuntimeInformation.IsOSPlatform(OSPlatform.Create("ANDROID")) ?
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + $"{_PathSep}DECa{_PathSep}" :
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + $"{_PathSep}DeCA{_PathSep}" :
 #endif
-            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + $"{_PathSep}DECa{_PathSep}";
+            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + $"{_PathSep}DeCA{_PathSep}";
 
         #endregion
 
@@ -206,6 +206,7 @@ namespace DeCA.Config
                 LogPath = $"{Path}Log{_PathSep}",
                 JsonPath = $"{Path}Json{_PathSep}",
                 PdfPath = $"{Path}Pdf{_PathSep}",
+                CountPath = $"{Path}Count{_PathSep}",
                 CertificateSerial = "",
                 CertificateThumbprint = "",
                 CertificatePath = "",
@@ -289,6 +290,12 @@ namespace DeCA.Config
         [XmlElement("PdfPath")]
         public string PdfPath { get; set; }
 
+        /// <summary>
+        /// Ruta al directorio que actuará almacenamiento
+        /// de archivs de contadores de DeCA.
+        /// </summary>
+        [XmlElement("CountPath")]
+        public string CountPath { get; set; }
 
         /// <summary>
         /// Número de serie del certificado a utilizar. Mediante este número
@@ -376,11 +383,10 @@ namespace DeCA.Config
         /// </summary>
         private static void CheckDirectories()
         {
-            if (!Directory.Exists(Path))
-                Directory.CreateDirectory(Path);
 
-            if (!Directory.Exists(_Current.LogPath))
-                Directory.CreateDirectory(_Current.LogPath);
+            foreach(var dir in new string[] { Path, _Current.LogPath, _Current.JsonPath, _Current.PdfPath, _Current.CountPath })
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
 
         }
 
