@@ -71,11 +71,10 @@ namespace DeCA.Business
                         else if (p.PropertyType == typeof(int) || p.PropertyType == typeof(int?))
                             _PdfTemplate.SetValue(name, $"{value:#,##0}");
 
-
-
                     }
                     else 
                     {
+
                         foreach (var party in parties)
                         {
                             foreach (var pp in party.GetType().GetProperties())
@@ -97,11 +96,11 @@ namespace DeCA.Business
                     }
 
                     // Inserto Qr
-                    var buffBm = QrCodeGenerator.GetQr(_Document.QRCodeValue);
+                    QrCode = QrCodeGenerator.GetQr(_Document.QRCodeValue);
 
                     _PdfTemplate.SetButtonImage(
                         "QRCodeImage",
-                        buffBm);
+                        QrCode);
 
                 }
                 catch (KeyNotFoundException nkEx)
@@ -119,9 +118,21 @@ namespace DeCA.Business
 
             }
 
-            return _PdfTemplate.GetBytes();
+            Pdf = _PdfTemplate.GetBytes();
+
+            return Pdf;
 
         }
+
+        /// <summary>
+        /// Datos binarios del bitmap del código QR del documento.
+        /// </summary>
+        public byte[] QrCode { get; private set; }
+
+        /// <summary>
+        /// Datos binarios del PDF del documento.
+        /// </summary>
+        public byte[] Pdf { get; private set; }
 
     }
 

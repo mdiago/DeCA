@@ -10,7 +10,7 @@
     <RootNamespace>DeCA</RootNamespace>
     <AssemblyName>DeCA</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-	<LangVersion>10.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -37,10 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\NetCore\Resources\DeCA_DEFAULT.pdf">
-		<Link>Resources\DeCA_DEFAULT.pdf</Link>
-		<LogicalName>DeCA.Resources.DeCA_DEFAULT.pdf</LogicalName>
-	</EmbeddedResource>
-  </ItemGroup>  
+      <Link>Resources\DeCA_DEFAULT.pdf</Link>
+      <LogicalName>DeCA.Resources.DeCA_DEFAULT.pdf</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

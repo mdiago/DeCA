@@ -11,18 +11,18 @@
 	<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<Title>DeCA</Title>
-	<Description>ibrería .NET y API REST de código abierto para la generación, validación y gestión del Documento Electrónico de Control Administrativo (DeCA).</Description>
+	<Description>Librería .NET y API REST de código abierto para la generación, validación y gestión del Documento Electrónico de Control Administrativo (DeCA).</Description>
 	<Copyright>Irene Solutions SL 2026</Copyright>
 	<PackageProjectUrl>https://github.com/mdiago/DeCA</PackageProjectUrl>
 	<PackageIcon>DeCA.png</PackageIcon>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<RepositoryUrl>https://github.com/mdiago/DeCA</RepositoryUrl>
 	<PackageTags>DeCA;Documento Electrónico de Control Administrativo</PackageTags>
-	<AssemblyVersion>1.0.0.1</AssemblyVersion>
-	<FileVersion>1.0.0.1</FileVersion>
+	<AssemblyVersion>1.0.0.2</AssemblyVersion>
+	<FileVersion>1.0.0.2</FileVersion>
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,26 +36,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
+    <None Remove="DeCA.png" />
+
+    <None Include="DeCA.png" Pack="true" PackagePath="\" />
+
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="DeCA.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="img\DeCA.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
   
   <Target Name="CustomContentTarget">
 	<ItemGroup>

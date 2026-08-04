@@ -42,6 +42,7 @@ using DeCA.Common;
 using DeCA.Config;
 using DeCA.Net.Rest.Json.Parser;
 using DeCA.Pdf;
+using DeCA.Qrcode;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -78,6 +79,16 @@ namespace DeCA.Business
         /// Se completa con ceros a la izquierda.
         /// </summary>
         int _FileNameVersionLength = 4;
+
+        /// <summary>
+        /// Plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.
+        /// </summary>
+        PdfTemplate _PdfTemplate;
+
+        /// <summary>
+        /// Conversor de instancia de Document a PDF.
+        /// </summary>
+        DeCAPdfConverter _DeCAPdfConverter;
 
         #endregion
 
@@ -284,6 +295,7 @@ namespace DeCA.Business
                 Utils.Throw("El documento DeCA ya tiene asignado un DownloadURL.", new ArgumentException("El documento DeCA ya tiene asignado un DownloadURL."));
 
             _Document.DownloadURL = _Document.QRCodeValue = DownloadURL;
+            _Document.QRCode = _DeCAPdfConverter.QrCode;
 
         }
 
@@ -313,25 +325,44 @@ namespace DeCA.Business
                 Utils.Throw("El documento DeCA ya tiene asignado un PDF.", new ArgumentException("El documento DeCA ya tiene asignado un PDF."));
 
             // Generar el PDF utilizando la plantilla incluida en la librería.
+            LoadPdfTemplate();
+            _DeCAPdfConverter = new DeCAPdfConverter(_Document, _PdfTemplate);
+
+            _Pdf = _DeCAPdfConverter.GetPdf();
+            _Document.FileHash = BitConverter.ToString(System.Security.Cryptography.SHA256.Create().ComputeHash(_Pdf)).Replace("-", "");
+            _Document.FileSize = _Pdf.Length;
+            _Document.FileName = $"{FileName}.pdf";
+
+        }
+
+        /// <summary>
+        /// Carga la plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.
+        /// </summary>
+        /// <returns> Plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.</returns>
+        private PdfTemplate LoadPdfTemplate() 
+        {
+
+            // Generar el PDF utilizando la plantilla incluida en la librería.
             PdfTemplate pdfTemplate = SourcePdfTemplate == null ? null : new PdfTemplate(SourcePdfTemplate);
 
-            if (pdfTemplate == null && SourcePdfFileName != null) 
+            if (pdfTemplate == null && SourcePdfFileName != null)
             {
 
                 string templatesDirectory = Path.Combine(Settings.Current.PdfTemplatePath, _Document.OwnerPartyID);
                 string templateFilePath = Path.Combine(templatesDirectory, $"{SourcePdfFileName}.pdf");
 
                 if (!File.Exists(templateFilePath))
-                    Utils.Throw($"No se ha encontrado la plantilla PDF '{SourcePdfFileName}' para el propietario '{_Document.OwnerPartyID}'.", 
+                    Utils.Throw($"No se ha encontrado la plantilla PDF '{SourcePdfFileName}' para el propietario '{_Document.OwnerPartyID}'.",
                         new FileNotFoundException($"No se ha encontrado la plantilla PDF '{SourcePdfFileName}' para el propietario '{_Document.OwnerPartyID}'."));
 
                 pdfTemplate = new PdfTemplate(File.ReadAllBytes(SourcePdfFileName));
 
             }
 
-            DeCAPdfConverter converter = new DeCAPdfConverter(_Document, pdfTemplate);
-            _Pdf = converter.GetPdf();
-            _Document.FileHash = BitConverter.ToString(System.Security.Cryptography.SHA256.Create().ComputeHash(_Pdf)).Replace("-", "");
+            _PdfTemplate = pdfTemplate;
+
+            return pdfTemplate;
+
 
         }
 

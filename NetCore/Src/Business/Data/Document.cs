@@ -97,6 +97,11 @@ namespace DeCA.Business.Data
         public DateTime? IssueDateTime { get; set; }
 
         /// <summary>
+        /// Año de emisión del documento.
+        /// </summary>
+        public string IssueYear => $"{IssueDateTime?.Year}";
+
+        /// <summary>
         /// Fecha prevista o efectiva del transporte.
         /// </summary>
         public DateTime TransportDate { get; set; }
@@ -254,6 +259,13 @@ namespace DeCA.Business.Data
         /// </summary>
         [Json(JsonIgnore = true)]
         public string SourcePdfFileName { get; set; }
+
+        /// <summary>
+        /// Contenido incorporado al código QR.
+        /// Normalmente coincidirá con la URL de descarga.
+        /// </summary>
+        [Json(JsonIgnore = true)]
+        public byte[] QRCode { get; set; }
 
         #endregion
 
