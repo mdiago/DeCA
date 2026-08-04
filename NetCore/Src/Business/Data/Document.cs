@@ -38,6 +38,7 @@
  */
 
 using DeCA.Net.Rest.Json.Kivu;
+using System.Text.Json.Serialization;
 
 namespace DeCA.Business.Data
 {
@@ -239,6 +240,17 @@ namespace DeCA.Business.Data
         /// Usuario o proceso que realizó la última modificación.
         /// </summary>
         public string ModifiedBy { get; set; }
+
+        /// <summary>
+        /// Datos binarios de la plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.
+        /// </summary>
+        [JsonIgnore]
+        public byte[] SourcePdfTemplate { get; set; }
+
+        /// <summary>
+        /// Nombre archivo de la plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.
+        /// </summary>
+        public string SourcePdfFileName { get; set; }
 
         #endregion
 

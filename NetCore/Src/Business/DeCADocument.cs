@@ -41,6 +41,8 @@ using DeCA.Business.Data;
 using DeCA.Common;
 using DeCA.Config;
 using DeCA.Net.Rest.Json.Parser;
+using DeCA.Pdf;
+using System.Xml.Linq;
 
 namespace DeCA.Business
 {
@@ -309,7 +311,23 @@ namespace DeCA.Business
                 Utils.Throw("El documento DeCA ya tiene asignado un PDF.", new ArgumentException("El documento DeCA ya tiene asignado un PDF."));
 
             // Generar el PDF utilizando la plantilla incluida en la librería.
-            DeCAPdfConverter converter = new DeCAPdfConverter(_Document);
+            PdfTemplate pdfTemplate = SourcePdfTemplate == null ? null : new PdfTemplate(SourcePdfTemplate);
+
+            if (pdfTemplate == null && SourcePdfFileName != null) 
+            {
+
+                string templatesDirectory = Path.Combine(Settings.Current.PdfTemplatePath, _Document.OwnerPartyID);
+                string templateFilePath = Path.Combine(templatesDirectory, $"{SourcePdfFileName}.pdf");
+
+                if (!File.Exists(templateFilePath))
+                    Utils.Throw($"No se ha encontrado la plantilla PDF '{SourcePdfFileName}' para el propietario '{_Document.OwnerPartyID}'.", 
+                        new FileNotFoundException($"No se ha encontrado la plantilla PDF '{SourcePdfFileName}' para el propietario '{_Document.OwnerPartyID}'."));
+
+                pdfTemplate = new PdfTemplate(File.ReadAllBytes(SourcePdfFileName));
+
+            }
+
+            DeCAPdfConverter converter = new DeCAPdfConverter(_Document, pdfTemplate);
             _Pdf = converter.GetPdf();
             _Document.FileHash = BitConverter.ToString(System.Security.Cryptography.SHA256.Create().ComputeHash(_Pdf)).Replace("-", "");
 
@@ -345,6 +363,16 @@ namespace DeCA.Business
         /// Normalmente coincidirá con la URL de descarga.
         /// </summary>
         public string QRCodeValue => DownloadURL;
+
+        /// <summary>
+        /// Datos binarios de la plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.
+        /// </summary>
+        public byte[] SourcePdfTemplate { get;set; }
+
+        /// <summary>
+        /// Nombre archivo de la plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.
+        /// </summary>
+        public string SourcePdfFileName { get; set; }
 
         #endregion
 

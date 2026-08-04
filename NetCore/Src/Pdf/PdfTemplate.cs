@@ -37,6 +37,8 @@
     address: info@irenesolutions.com
  */
 
+using DeCA.Common;
+using DeCA.Config;
 using DeCA.Pdf.Appearance;
 using DeCA.Pdf.Core;
 using DeCA.Pdf.Forms;
@@ -112,8 +114,9 @@ namespace DeCA.Pdf
         /// Inicializa una plantilla PDF desde su contenido binario.
         /// </summary>
         /// <param name="source">Contenido binario de la plantilla.</param>
-        private PdfTemplate(byte[] source)
+        internal PdfTemplate(byte[] source)
         {
+
             _source = source;
             _parser = new PdfParser(source);
             ReadDocumentInformation();
@@ -121,6 +124,7 @@ namespace DeCA.Pdf
             List<PdfFormField> fields = ReadFields();
             _fields = new ReadOnlyCollection<PdfFormField>(fields);
             _fieldsByName = CreateFieldIndex(fields);
+
         }
 
         #endregion
@@ -571,8 +575,31 @@ namespace DeCA.Pdf
             }
         }
 
+        /// <summary>
+        /// Guarda el documento PDF como una plantilla en el sitema de archivos.
+        /// </summary>
+        /// <param name="ownerPartyID"> Identificador del interlocutor que representa a la empresa
+        /// propietaria del documento en el sistema de origen.</param>
+        /// <param name="pdf"> Datos binarios del pdf a almacenar como plantilla.</param>
+        /// <param name="name"> Nombre para la plantilla pdf.</param>
+        public static void Save(string ownerPartyID, byte[] pdf, string name) 
+        {
 
-    #endregion
+            if (string.IsNullOrWhiteSpace(ownerPartyID))
+                Utils.Throw("Debe indicar el identificador del interlocutor propietario.", new ArgumentException("Debe indicar el identificador del interlocutor propietario.", nameof(ownerPartyID)));
+
+            if (pdf == null || pdf.Length == 0)
+                Utils.Throw("El contenido del PDF está vacío.", new ArgumentException("El contenido del PDF está vacío.", nameof(pdf)));
+
+            string templatesDirectory = Path.Combine(Settings.Current.PdfTemplatePath, ownerPartyID);
+            Directory.CreateDirectory(templatesDirectory);
+            string templateFilePath = Path.Combine(templatesDirectory, $"{name}.pdf");
+
+            File.WriteAllBytes(templateFilePath, pdf);
+
+        }
+
+        #endregion
 
         #region Métodos Públicos de Instancia
 

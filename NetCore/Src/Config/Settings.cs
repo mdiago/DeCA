@@ -207,6 +207,7 @@ namespace DeCA.Config
                 JsonPath = $"{Path}Json{_PathSep}",
                 PdfPath = $"{Path}Pdf{_PathSep}",
                 CountPath = $"{Path}Count{_PathSep}",
+                PdfTemplatePath = $"{Path}PdfTemplate{_PathSep}",
                 CertificateSerial = "",
                 CertificateThumbprint = "",
                 CertificatePath = "",
@@ -292,10 +293,17 @@ namespace DeCA.Config
 
         /// <summary>
         /// Ruta al directorio que actuará almacenamiento
-        /// de archivs de contadores de DeCA.
+        /// de archivos de contadores de DeCA.
         /// </summary>
         [XmlElement("CountPath")]
         public string CountPath { get; set; }
+
+        /// <summary>
+        /// Ruta al directorio que actuará almacenamiento
+        /// de archivos pdf de plantillas de DeCA.
+        /// </summary>
+        [XmlElement("PdfTemplatePath")]
+        public string PdfTemplatePath { get; set; }
 
         /// <summary>
         /// Número de serie del certificado a utilizar. Mediante este número
@@ -384,7 +392,8 @@ namespace DeCA.Config
         private static void CheckDirectories()
         {
 
-            foreach(var dir in new string[] { Path, _Current.LogPath, _Current.JsonPath, _Current.PdfPath, _Current.CountPath })
+            foreach(var dir in new string[] { Path, _Current.LogPath, _Current.JsonPath, 
+                _Current.PdfPath, _Current.CountPath, _Current.PdfTemplatePath })
                 if (!Directory.Exists(dir))
                     Directory.CreateDirectory(dir);
 
