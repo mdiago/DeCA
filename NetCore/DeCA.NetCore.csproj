@@ -4,7 +4,7 @@
     <TargetFrameworks>net7.0;net8.0;netcoreapp3.1</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <ApplicationIcon>img\DeCA.ico</ApplicationIcon>
+    <ApplicationIcon>DECa.ico</ApplicationIcon>
 	<LangVersion>10.0</LangVersion>
 	<AssemblyName>DeCA</AssemblyName>
 	<RootNamespace>DeCA</RootNamespace>
@@ -14,7 +14,7 @@
 	<Description>ibrería .NET y API REST de código abierto para la generación, validación y gestión del Documento Electrónico de Control Administrativo (DeCA).</Description>
 	<Copyright>Irene Solutions SL 2026</Copyright>
 	<PackageProjectUrl>https://github.com/mdiago/DeCA</PackageProjectUrl>
-	<PackageIcon></PackageIcon>
+	<PackageIcon>DeCA.png</PackageIcon>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<RepositoryUrl>https://github.com/mdiago/DeCA</RepositoryUrl>
 	<PackageTags>DeCA;Documento Electrónico de Control Administrativo</PackageTags>
@@ -26,7 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="img\DeCA.ico" />
+    <Content Include="DECa.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +47,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DeCA.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="img\DeCA.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
