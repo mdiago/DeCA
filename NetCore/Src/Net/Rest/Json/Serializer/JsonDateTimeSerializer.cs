@@ -37,6 +37,8 @@
     address: info@irenesolutions.com
  */
 
+using System.Globalization;
+
 namespace DeCA.Net.Rest.Json.Serializer
 {
 
@@ -49,17 +51,29 @@ namespace DeCA.Net.Rest.Json.Serializer
         #region Métodos Públicos de Instancia
 
         /// <summary>
-        /// Devuelve la representación en JSON
-        /// de la propiedad facilitada para la
-        /// instancia facilitada.
+        /// Devuelve la representación JSON UTC del valor de fecha facilitado.
         /// </summary>
-        /// <param name="value">Valor a serializar.</param>
-        /// <returns>Representación JSON de la propiedad.</returns>
+        /// <param name="value">
+        /// Valor de fecha que se desea serializar.
+        /// </param>
+        /// <returns>
+        /// Representación JSON de la fecha o null cuando no contiene valor.
+        /// </returns>
         public string ToJson(object value)
         {
 
-            var date = value as DateTime?;
-            return $"\"{date:yyyy-MM-dd}T{date:HH}:{date:mm}:{date:ss}Z\"";
+            if (value == null)
+                return "null";
+
+            DateTime date = (DateTime)value;
+
+            DateTime utcDate =
+                date.ToUniversalTime();
+
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "\"{0:yyyy-MM-dd'T'HH:mm:ss'Z'}\"",
+                utcDate);
 
         }
 

@@ -140,8 +140,8 @@ namespace DeCA.Business
         {
 
             if (!File.Exists(PdfFilePath))
-                Utils.Throw("El cambio de un documento DeCA ya creado no está implementado.",
-                    new FileNotFoundException("El cambio de un documento DeCA ya creado no está implementado."));
+                Utils.Throw($"No existe el documento con id '{_Document.DeCAID}'.",
+                    new FileNotFoundException($"No existe el documento con id '{_Document.DeCAID}'."));
 
             lock (_Locker)
             {

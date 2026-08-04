@@ -37,6 +37,7 @@
     address: info@irenesolutions.com
  */
 
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace DeCA.Net.Rest.Json.Parser.Lexer.Tokens
@@ -141,7 +142,17 @@ namespace DeCA.Net.Rest.Json.Parser.Lexer.Tokens
             var value = Value.Substring(1, Value.Length - 2);
 
             if (Regex.IsMatch(value, @"^\s*\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\s*$"))
-                return Convert.ToDateTime(value.Trim());
+            {
+
+                DateTime utcDate = DateTime.ParseExact(value,
+                    "yyyy-MM-dd'T'HH:mm:ss'Z'",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal |
+                    DateTimeStyles.AdjustToUniversal);
+
+                return utcDate.ToLocalTime();
+
+            }
 
             return value;
 
