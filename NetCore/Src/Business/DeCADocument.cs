@@ -40,6 +40,7 @@
 using DeCA.Business.Data;
 using DeCA.Common;
 using DeCA.Config;
+using DeCA.Net.Rest.Json.Parser;
 
 namespace DeCA.Business
 {
@@ -49,6 +50,16 @@ namespace DeCA.Business
     /// </summary>
     public class DeCADocument
     {
+
+        #region Variables Privadas Estáticas
+
+        /// <summary>
+        /// Objeto utilizado para sincronizar las operaciones realizadas
+        /// sobre el contador.
+        /// </summary>
+        private static readonly object _Locker = new object();
+
+        #endregion
 
         #region Variables Privadas de Instancia
 
@@ -132,7 +143,19 @@ namespace DeCA.Business
                 Utils.Throw("El cambio de un documento DeCA ya creado no está implementado.",
                     new FileNotFoundException("El cambio de un documento DeCA ya creado no está implementado."));
 
-            _Document.Version = Directory.GetFiles(Path.GetDirectoryName(PdfFilePath), $"{_Document.DeCAID}.*.pdf").Length;
+            lock (_Locker)
+            {
+
+                var filesVersions = Directory.GetFiles(Path.GetDirectoryName(JsonFilePath), $"{_Document.DeCAID}.*.json");
+                _Document.Version = filesVersions.Length;
+
+                var json = File.ReadAllText(filesVersions[0]);
+                var jsonParser = new JsonParser(json);
+                var result = jsonParser.GetResult<Document>();
+
+                _Document.CreationDateTime = result.CreationDateTime;
+
+            }            
 
             if (string.IsNullOrEmpty($"{_Document.DocumentNumber}".Trim()))
                 _Document.DocumentNumber = _Document.DeCAID;
@@ -153,7 +176,7 @@ namespace DeCA.Business
                 SetID();
 
             SetUrl();
-            SetTimeLife();
+            SetTimeLife(setId ? null : _Document.CreationDateTime);
             SetPdf();
             _Json = _Document.ToJson();
 
@@ -263,12 +286,12 @@ namespace DeCA.Business
         /// <summary>
         /// Asigna los valores de tiempo de vida al documento DeCA.
         /// </summary>
-        private void SetTimeLife()
+        private void SetTimeLife(DateTime? creation = null)
         {
 
             var now = DateTime.Now;
 
-            _Document.CreationDateTime = now;
+            _Document.CreationDateTime = creation??now;
             _Document.ModificationDateTime = now;
             _Document.DownloadAvailableFromDateTime = now;
             _Document.DownloadAvailableUntilDateTime = now.AddYears(1);

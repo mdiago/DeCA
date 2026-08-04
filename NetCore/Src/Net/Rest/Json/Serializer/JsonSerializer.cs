@@ -57,10 +57,14 @@ namespace DeCA.Net.Rest.Json.Serializer
         static readonly Dictionary<Type, IJsonSerializer> _SerializersByType = new Dictionary<Type, IJsonSerializer>()
         {
             {typeof(int),       new JsonIntSerializer() },
+            {typeof(int?),      new JsonIntSerializer() },
             {typeof(long),      new JsonIntSerializer() },
+            {typeof(long?),     new JsonIntSerializer() },
             {typeof(byte),      new JsonIntSerializer() },
             {typeof(decimal),   new JsonDecimalSerializer() },
+            {typeof(decimal?),  new JsonDecimalSerializer() },
             {typeof(double),    new JsonDecimalSerializer() },
+            {typeof(double?),   new JsonDecimalSerializer() },
             {typeof(string),    new JsonStringSerializer() },
             {typeof(DateTime),  new JsonDateTimeSerializer() },
             {typeof(DateTime?), new JsonDateTimeSerializer() },
