@@ -39,6 +39,7 @@
 
 using DeCA.Pdf.Core;
 using DeCA.Pdf.Images;
+using System;
 using System.Globalization;
 using System.Text;
 

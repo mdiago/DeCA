@@ -37,6 +37,7 @@
     address: info@irenesolutions.com
  */
 
+using System;
 using System.Text;
 
 namespace DeCA.Qrcode

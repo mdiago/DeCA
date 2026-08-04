@@ -37,6 +37,8 @@
     address: info@irenesolutions.com
  */
 
+using System;
+
 namespace DeCA.Net.Rest.Json.Serializer
 {
 

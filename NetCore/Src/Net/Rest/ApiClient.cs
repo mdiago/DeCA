@@ -46,6 +46,7 @@ using DeCA.Net.Rest.Json.Kivu;
 using DeCA.Net.Rest.Json.Parser;
 using DeCA.Net.Rest.List;
 using DeCA.Business.Data;
+using System;
 
 
 namespace DeCA.Net.Rest

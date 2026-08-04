@@ -38,6 +38,7 @@
  */
 
 using DeCA.Pdf.Core;
+using System;
 
 namespace DeCA.Pdf.Images
 {

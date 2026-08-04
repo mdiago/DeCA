@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0;net8.0;netcoreapp3.1</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>img\DeCA.ico</ApplicationIcon>
+	<LangVersion>10.0</LangVersion>
+	<AssemblyName>DeCA</AssemblyName>
+	<RootNamespace>DeCA</RootNamespace>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<Title>DeCA</Title>
+	<Description>ibrería .NET y API REST de código abierto para la generación, validación y gestión del Documento Electrónico de Control Administrativo (DeCA).</Description>
+	<Copyright>Irene Solutions SL 2026</Copyright>
+	<PackageProjectUrl>https://github.com/mdiago/DeCA</PackageProjectUrl>
+	<PackageIcon></PackageIcon>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/mdiago/DeCA</RepositoryUrl>
+	<PackageTags>DeCA;Documento Electrónico de Control Administrativo</PackageTags>
+	<AssemblyVersion>1.0.0.1</AssemblyVersion>
+	<FileVersion>1.0.0.1</FileVersion>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	<Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="img\DeCA.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DeCA_DEFAULT.pdf">
+      <LogicalName>DeCA.Resources.DeCA_DEFAULT.pdf</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="img\DeCA.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  
+  <Target Name="CustomContentTarget">
+	<ItemGroup>
+      <TfmSpecificPackageFile Include="..\NetFramework461\bin\Debug\DeCA.dll">
+        <PackagePath>lib/net461</PackagePath>
+      </TfmSpecificPackageFile>
+       <TfmSpecificPackageFile Include="..\NetFramework461\bin\Debug\DeCA.xml">
+        <PackagePath>lib/net461</PackagePath>
+      </TfmSpecificPackageFile>
+    </ItemGroup>
+  </Target> 
+  
+</Project>

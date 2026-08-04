@@ -40,6 +40,7 @@
 using DeCA.Qrcode.Exceptions;
 using DeCA.Qrcode;
 using DeCA.Common;
+using System.Collections.Generic;
 
 namespace DeCA.Business
 {

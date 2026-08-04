@@ -41,6 +41,8 @@ using DeCA.Common;
 using DeCA.Config;
 using System.Globalization;
 using System.Text;
+using System;
+using System.IO;
 
 namespace DeCA.Business
 {

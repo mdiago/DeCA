@@ -37,8 +37,10 @@
     address: info@irenesolutions.com
  */
 
+using DeCA.Net.Rest.Json;
 using DeCA.Net.Rest.Json.Kivu;
-using System.Text.Json.Serialization;
+using System;
+using System.Collections.Generic;
 
 namespace DeCA.Business.Data
 {
@@ -244,12 +246,13 @@ namespace DeCA.Business.Data
         /// <summary>
         /// Datos binarios de la plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.
         /// </summary>
-        [JsonIgnore]
+        [Json(JsonIgnore = true)]
         public byte[] SourcePdfTemplate { get; set; }
 
         /// <summary>
         /// Nombre archivo de la plantilla PDF utilizada para generar el PDF definitivo del documento DeCA.
         /// </summary>
+        [Json(JsonIgnore = true)]
         public string SourcePdfFileName { get; set; }
 
         #endregion

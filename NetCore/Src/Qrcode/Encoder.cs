@@ -38,6 +38,8 @@
  */
 
 using DeCA.Qrcode.Exceptions;
+using System;
+using System.Collections.Generic;
 
 namespace DeCA.Qrcode
 {

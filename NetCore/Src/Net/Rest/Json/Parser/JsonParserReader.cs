@@ -37,6 +37,8 @@
     address: info@irenesolutions.com
  */
 
+using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using DeCA.Net.Rest.Json.Parser.Lexer;
 using DeCA.Net.Rest.Json.Parser.Lexer.Tokens;

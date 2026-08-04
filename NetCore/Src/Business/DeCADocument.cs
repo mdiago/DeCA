@@ -42,7 +42,9 @@ using DeCA.Common;
 using DeCA.Config;
 using DeCA.Net.Rest.Json.Parser;
 using DeCA.Pdf;
-using System.Xml.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace DeCA.Business
 {
@@ -124,7 +126,7 @@ namespace DeCA.Business
             if (erors.Count > 0)
             {
 
-                var errMsg = $"El documento DeCA no es válido: {string.Join('\n', erors)}";
+                var errMsg = $"El documento DeCA no es válido: {string.Join("\n", erors)}";
                 Utils.Throw(errMsg, new ArgumentException(errMsg));
 
             }
@@ -237,10 +239,10 @@ namespace DeCA.Business
                     errors.Add($"El rol {role} únicamente se puede utilizar una vez el Parties y se ha econtrado {partyRolesCount[role]} veces.");
 
             if (mandatoryPartyRoles.Count > 0)
-                errors.Add($"Faltan los siguienetes roles de party obligatorios: {string.Join(',', mandatoryPartyRoles)}.");
+                errors.Add($"Faltan los siguienetes roles de party obligatorios: {string.Join(",", mandatoryPartyRoles)}.");
 
             if (unknownPartyRoles.Count > 0)
-                errors.Add($"Encontrados los siguienetes roles de party desconocidos: {string.Join(',', unknownPartyRoles)}.");
+                errors.Add($"Encontrados los siguienetes roles de party desconocidos: {string.Join(",", unknownPartyRoles)}.");
 
             if (string.IsNullOrEmpty($"{_Document.GoodsDescription}".Trim()))
                 errors.Add("GoodsDescription no puede ser nulo o vacío.");
@@ -401,7 +403,7 @@ namespace DeCA.Business
 
             Array.Sort(files);
 
-            var currentVersionFile = files.LastOrDefault();
+            var currentVersionFile = files[files.Length - 1];
 
             var json = File.ReadAllText(currentVersionFile);
             var jsonParser = new JsonParser(json);

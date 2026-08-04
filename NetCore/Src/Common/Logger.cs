@@ -37,8 +37,11 @@
     address: info@irenesolutions.com
  */
 
+using System.Collections.Generic;
 using System.Text;
 using DeCA.Config;
+using System;
+using System.IO;
 
 namespace DeCA.Common
 {

@@ -38,6 +38,7 @@
  */
 
 using DeCA.Net.Rest.Json.Kivu;
+using System.Collections.Generic;
 
 namespace DeCA.Net.Rest.List
 {

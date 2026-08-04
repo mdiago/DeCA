@@ -38,6 +38,7 @@
  */
 
 using DeCA.Net.Rest.Json.Parser.Lexer;
+using System;
 using System.Collections;
 using System.Reflection;
 

@@ -39,7 +39,9 @@
 
 using DeCA.Common;
 using DeCA.Net.Rest;
+using System;
 using System.Globalization;
+using System.IO;
 using System.Net.NetworkInformation;
 #if !LE_461
 using System.Runtime.InteropServices;

@@ -43,8 +43,11 @@ using DeCA.Pdf.Appearance;
 using DeCA.Pdf.Core;
 using DeCA.Pdf.Forms;
 using DeCA.Pdf.Images;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 
 namespace DeCA.Pdf
