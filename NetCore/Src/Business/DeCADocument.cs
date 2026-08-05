@@ -142,6 +142,10 @@ namespace DeCA.Business
 
             }
 
+            // Generar el PDF utilizando la plantilla incluida en la librería.
+            LoadPdfTemplate();
+            _DeCAPdfConverter = new DeCAPdfConverter(_Document, _PdfTemplate);
+
         }
 
         #endregion
@@ -294,8 +298,7 @@ namespace DeCA.Business
             if (!string.IsNullOrEmpty($"{_Document.DownloadURL}".Trim()))
                 Utils.Throw("El documento DeCA ya tiene asignado un DownloadURL.", new ArgumentException("El documento DeCA ya tiene asignado un DownloadURL."));
 
-            _Document.DownloadURL = _Document.QRCodeValue = DownloadURL;
-            _Document.QRCode = _DeCAPdfConverter.QrCode;
+            _Document.DownloadURL = _Document.QRCodeValue = DownloadURL;           
 
         }
 
@@ -324,14 +327,11 @@ namespace DeCA.Business
             if (_Pdf != null)
                 Utils.Throw("El documento DeCA ya tiene asignado un PDF.", new ArgumentException("El documento DeCA ya tiene asignado un PDF."));
 
-            // Generar el PDF utilizando la plantilla incluida en la librería.
-            LoadPdfTemplate();
-            _DeCAPdfConverter = new DeCAPdfConverter(_Document, _PdfTemplate);
-
             _Pdf = _DeCAPdfConverter.GetPdf();
             _Document.FileHash = BitConverter.ToString(System.Security.Cryptography.SHA256.Create().ComputeHash(_Pdf)).Replace("-", "");
             _Document.FileSize = _Pdf.Length;
             _Document.FileName = $"{FileName}.pdf";
+            _Document.QRCode = _DeCAPdfConverter.QrCode;
 
         }
 
@@ -362,7 +362,6 @@ namespace DeCA.Business
             _PdfTemplate = pdfTemplate;
 
             return pdfTemplate;
-
 
         }
 
