@@ -442,6 +442,38 @@ namespace DeCA.Business
 
         }
 
+        /// <summary>
+        /// Carga un pdf DeCA desde el sistema de archivos a partir de su identificador único.
+        /// </summary>
+        /// <param name="ownerPartyID"> Identificador del interlocutor que representa a la empresa
+        /// propietaria del documento en el sistema de origen.</param>
+        /// <param name="issueYear">Año de emisión.</param>
+        /// <param name="decaID">Identificador único del documento electrónico de control.</param>
+        /// <returns>Última versión del documento.</returns>
+        public static byte[] LoadPdf(string ownerPartyID, string issueYear, string decaID)
+        {
+
+            string subDirectory = Path.Combine(ownerPartyID, issueYear.ToString());
+            string pdfDirectory = Path.Combine(Settings.Current.PdfPath, subDirectory);
+            string searchPattern = $"{decaID}.*.pdf";
+
+            string[] files = Directory.GetFiles(pdfDirectory, searchPattern, SearchOption.TopDirectoryOnly);
+
+            if (files.Length == 0)
+                Utils.Throw($"No se ha encontrado ningún documento DeCA con id '{decaID}' para el interlocutor '{ownerPartyID}' y año de emisión '{issueYear}'.",
+                    new FileNotFoundException($"No se ha encontrado ningún documento DeCA con id '{decaID}' para el interlocutor '{ownerPartyID}' y año de emisión '{issueYear}'."));
+
+            Array.Sort(files);
+
+            var currentVersionFile = files[files.Length - 1];
+
+            var pdf = File.ReadAllBytes(currentVersionFile);
+
+            return pdf;
+
+        }
+
+
         #endregion
 
         #region Métodos Públicos de Instancia
