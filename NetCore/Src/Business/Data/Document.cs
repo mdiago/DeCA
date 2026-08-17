@@ -239,6 +239,11 @@ namespace DeCA.Business.Data
         public string SourceDocumentID { get; set; }
 
         /// <summary>
+        /// Clave técnica o clave primaria del documento en el sistema de origen.
+        /// </summary>
+        public string SourceDocumentKey { get; set; }
+
+        /// <summary>
         /// Usuario o proceso que creó el documento.
         /// </summary>
         public string CreatedBy { get; set; }

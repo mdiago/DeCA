@@ -18,11 +18,11 @@
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<RepositoryUrl>https://github.com/mdiago/DeCA</RepositoryUrl>
 	<PackageTags>DeCA;Documento Electrónico de Control Administrativo</PackageTags>
-	<AssemblyVersion>1.0.0.2</AssemblyVersion>
-	<FileVersion>1.0.0.2</FileVersion>
+	<AssemblyVersion>1.0.0.3</AssemblyVersion>
+	<FileVersion>1.0.0.3</FileVersion>
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-	<Version>1.0.2</Version>
+	<Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

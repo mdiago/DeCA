@@ -221,13 +221,10 @@ namespace DeCA.Config
                 },
                 Api = new Api()
                 {
-                    EndPointCreate = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DECa/Documents/Create",
-                    EndPointCancel = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DECa/Documents/Cancel",
-                    EndPointGetSellers = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DECa/Documents/GetSellers",
-                    EndPointGetRecords = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DECa/Documents/GetFilteredList",
-                    EndPointGetDECaInvoices = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DECa/Documents/GetAeatInvoices",
-                    EndPointGetFilteredList = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DECa/Documents/GetFilteredList",
-                    ServiceKey = "1234"
+                    EndPointCreate =            "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/Create",
+                    EndPointDelete =            "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/Delete",
+                    EndPointGetFilteredList =   "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/GetFilteredList",
+                    ServiceKey =                "1234"
                 },
                 TlRuntime = true
             };

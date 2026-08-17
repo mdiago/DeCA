@@ -46,6 +46,7 @@ using DeCA.Qrcode;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace DeCA.Business
 {
@@ -372,7 +373,10 @@ namespace DeCA.Business
         /// <summary>
         /// URL HTTPS única que permite descargar directamente el PDF.
         /// </summary>
-        public string DownloadURL => $"{Settings.Current.DECaSettings.DECaEndPointPrefix}?dc={_Document.DeCAID}";
+        public string DownloadURL => $"{Settings.Current.DECaSettings.DECaEndPointPrefix}" +
+            $"{BitConverter.ToString(Encoding.UTF8.GetBytes(_Document.OwnerPartyID)).Replace("-","")}/" +
+            $"{BitConverter.ToString(Encoding.UTF8.GetBytes(_Document.IssueYear)).Replace("-", "")}/" +
+            $"{BitConverter.ToString(Encoding.UTF8.GetBytes(_Document.DeCAID)).Replace("-", "")}";
 
         /// <summary>
         /// Nombre sin estexsión para los archivos PDF y JSON asociados al documento DeCA.

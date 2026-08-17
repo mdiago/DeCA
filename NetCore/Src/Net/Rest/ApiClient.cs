@@ -141,12 +141,12 @@ namespace DeCA.Net.Rest
         /// <summary>
         /// Crea un registro de anulación mediante el API.
         /// </summary>
-        /// <param name="invoice">DECa a anular.</param>
+        /// <param name="document">DECa a anular.</param>
         /// <returns>Resultado llamada API.</returns>
         public static ExpandoObject Delete(Document document)
         {
 
-            return Post(document, Api.EndPointCancel);
+            return Post(document, Api.EndPointDelete);
 
         }
 

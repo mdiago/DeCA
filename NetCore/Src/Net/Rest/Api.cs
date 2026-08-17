@@ -52,7 +52,7 @@ namespace DeCA.Net.Rest
         /// <summary>
         /// Endpoint ct.
         /// </summary>
-        internal static readonly string EndPointCt = "https://facturae.irenesolutions.com:8050/Kivu/Taxes/DECa/Ct/Create/Test/v17";
+        internal static readonly string EndPointCt = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Ct/Create/Test/v17";
 
         #endregion
 
@@ -70,29 +70,14 @@ namespace DeCA.Net.Rest
         #region Propiedades Públicas de Instancia
 
         /// <summary>
-        /// Endpoint creación de factruas.
+        /// Endpoint creación de documentos DeCA.
         /// </summary>
         public string EndPointCreate { get; set; }
 
         /// <summary>
-        /// Endpoint anulación de factruas.
+        /// Endpoint anulación de documentos DeCA.
         /// </summary>
-        public string EndPointCancel { get; set; }
-
-        /// <summary>
-        /// Endpoint consulta emisores.
-        /// </summary>
-        public string EndPointGetSellers { get; set; }
-
-        /// <summary>
-        /// Endpoint consulta registros envíados.
-        /// </summary>
-        public string EndPointGetRecords { get; set; }
-
-        /// <summary>
-        /// Endpoint consulta registros en DeCA.
-        /// </summary>
-        public string EndPointGetDECaInvoices { get; set; }
+        public string EndPointDelete { get; set; }
 
         /// <summary>
         /// Endpoint consulta envíos realizados.

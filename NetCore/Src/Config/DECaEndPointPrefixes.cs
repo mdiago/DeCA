@@ -52,12 +52,12 @@ namespace DeCA.Config
         /// <summary>
         /// Prefijo del endpoint de pruebas.
         /// </summary>
-        public const string Test = "https://se-api-face.redsara.es/providers";
+        public const string Test = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/Public/";
 
         /// <summary>
         /// Prefijo del endpoint de producción.
         /// </summary>
-        public const string Prod = "https://api.face.gob.es/providers";
+        public const string Prod = "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/Public/";
 
         #endregion
 
