@@ -9,7 +9,7 @@ Librería .NET y API REST de código abierto para la generación, validación y 
 >
 > :globe_with_meridians: [Acceso al API REST](https://deca.irenesolutions.com)
 > 
-> Con el API REST disponemos de una herramienta de trabajo sencilla sin la complicación de preocuparnos de la gestión de un repositorio central de documentos.
+> Con el API REST disponemos de una herramienta de trabajo sencilla sin la complicación de gestionar un repositorio central de documentos, su publicación en Internet, disponibilidad y caducidad.
 
 
 <br>
@@ -18,6 +18,23 @@ Librería .NET y API REST de código abierto para la generación, validación y 
 # Creación de un documento DeCA en PDF
 
 El siguiente ejemplo crea un documento **DeCA**, lo convierte a PDF utilizando la plantilla incluida en la librería y lo guarda en disco.
+
+> ### Gestión local del documento
+>
+> En este ejemplo la generación y gestión del documento se realiza **íntegramente en local mediante la librería DeCA**.
+>
+> La aplicación que integra la librería es responsable no solo de generar y almacenar el PDF, sino también de implementar la infraestructura necesaria para su disponibilidad posterior a través de Internet.
+>
+> En particular, si se desea utilizar el código QR del DeCA como mecanismo de acceso al documento, la aplicación deberá encargarse de:
+>
+> - Generar y mantener una URL pública de acceso al documento.
+> - Incluir dicha URL en `DownloadURL` y como valor del código QR.
+> - Publicar y conservar el PDF en un servidor accesible desde Internet.
+> - Controlar el período durante el cual el documento debe permanecer disponible.
+> - Gestionar la caducidad del acceso cuando finalice dicho período.
+> - Garantizar la persistencia y disponibilidad de las distintas versiones del documento cuando corresponda.
+>
+> La librería proporciona las herramientas necesarias para generar el DeCA y su PDF, pero **la publicación, almacenamiento remoto y control del período de disponibilidad son responsabilidad de la aplicación que la integra**.
 
 ```csharp
 using System.IO;
@@ -158,7 +175,25 @@ File.WriteAllBytes("DeCA.pdf", converter.GetPdf());
 
 # Creación de un documento DeCA utilizando el API REST
 
-El siguiente ejemplo crea un documento **DeCA**, lo convierte a PDF utilizando la plantilla incluida en la librería y lo guarda en disco.
+El siguiente ejemplo crea un documento **DeCA** utilizando el API REST.
+
+> ### Gestión automática mediante el API REST
+>
+> Al utilizar el **API REST de DeCA**, toda la infraestructura necesaria para la generación, publicación y disponibilidad del documento se gestiona automáticamente.
+>
+> La aplicación cliente únicamente debe enviar los datos necesarios para crear el DeCA. El servicio se encarga de:
+>
+> - Asignar la identificación y versión del documento.
+> - Generar el PDF definitivo.
+> - Generar el código QR.
+> - Crear la URL pública de acceso al documento.
+> - Almacenar y publicar el PDF.
+> - Mantener disponibles los documentos y sus versiones.
+> - Controlar automáticamente el período de disponibilidad y la caducidad del acceso.
+>
+> Por tanto, al utilizar el API REST **no es necesario implementar un repositorio público de documentos ni desarrollar mecanismos propios para gestionar su publicación y caducidad**.
+>
+> Una vez creado el documento, la respuesta del servicio contiene en `Return.DownloadURL` la URL desde la que puede visualizarse el DeCA.
 
 ```csharp
 
