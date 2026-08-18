@@ -7,7 +7,7 @@ Librería .NET y API REST de código abierto para la generación, validación y 
 
 > ### La funcionalidad de DeCA está disponible ( :wink: gratis) también en línea:
 >
-> :globe_with_meridians: [Acceso al API REST](https://facturae.irenesolutions.com/deca/go)
+> :globe_with_meridians: [Acceso al API REST](https://deca.irenesolutions.com)
 > 
 > Con el API REST disponemos de una herramienta de trabajo sencilla sin la complicación de preocuparnos de la gestión de un repositorio central de documentos.
 
