@@ -3,6 +3,18 @@
 # DeCA
 Librería .NET y API REST de código abierto para la generación, validación y gestión del Documento Electrónico de Control Administrativo (DeCA). Diseñada para facilitar su integración en ERP, TMS y aplicaciones de gestión del transporte.
 
+<br>
+
+> ### La funcionalidad de DeCA está disponible ( :wink: gratis) también en línea:
+>
+> :globe_with_meridians: [Acceso al API REST](https://deca.irenesolutions.com)
+> 
+> Con el API REST disponemos de una herramienta de trabajo sencilla sin la complicación de preocuparnos de la gestión de un repositorio central de documentos.
+
+
+<br>
+<br>
+
 # Creación de un documento DeCA en PDF
 
 El siguiente ejemplo crea un documento **DeCA**, lo convierte a PDF utilizando la plantilla incluida en la librería y lo guarda en disco.
