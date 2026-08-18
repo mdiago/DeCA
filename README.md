@@ -156,6 +156,154 @@ DeCAPdfConverter converter = new DeCAPdfConverter(document);
 File.WriteAllBytes("DeCA.pdf", converter.GetPdf());
 ```
 
+# Creación de un documento DeCA utilizando el API REST
+
+El siguiente ejemplo crea un documento **DeCA**, lo convierte a PDF utilizando la plantilla incluida en la librería y lo guarda en disco.
+
+```csharp
+
+    // Crear el documento DeCA.
+    Document document = new Document()
+    {
+        // Identificación del documento.
+        OwnerPartyID = "B12959755",
+        Version = 0,
+        Status = "DRAFT",
+
+        // Fechas del documento.
+        CreationDateTime = new DateTime(2026, 7, 31, 10, 30, 00),
+        ModificationDateTime = new DateTime(2026, 7, 31, 10, 30, 00),
+        IssueDateTime = new DateTime(2026, 7, 31, 10, 30, 00),
+        TransportDate = new DateTime(2026, 8, 1),
+
+        // Mercancía.
+        GoodsDescription = "Componentes electrónicos",
+        GoodsQuantity = 1000.00m,
+        GoodsQuantityUnitCode = "KGM",
+        GrossWeight = 500.00m,
+        IsDangerousGoods = true,
+
+        // Vehículo.
+        TractorRegistrationNumber = "MHJ3322Z",
+        TrailerRegistrationNumber = "BBJ3322Z",
+        SecondTrailerRegistrationNumber = "AAJ3322Z",
+        SpecialCirculationAuthorizationNumber = "99-99",
+
+        // Información adicional.
+        Remarks = "Documento de ejemplo generado con DeCA.",
+        ModificationReason = "Creación del documento de prueba",
+
+
+        // Intervinientes y lugares del transporte.
+        Parties = new List<Party>()
+        {
+            // Cargador contractual.
+            new Party()
+            {
+                PartyRole = "CC",
+                PartyID = "B12959755",
+                FullName = "IRENE SOLUTIONS SL",
+                TaxID = "B12959755",
+                Address = "PZ ESTANY COLOMBRI, 3B",
+                PostalCode = "12530",
+                City = "BURRIANA",
+                Region = "CASTELLÓN",
+                CountryID = "ES",
+                Mail = "info@irenesolutions.com",
+                Phone = "+34 964 000 000"
+            },
+
+            // Transportista efectivo.
+            new Party()
+            {
+                PartyRole = "TE",
+                PartyID = "B44531218",
+                FullName = "WEFINZ SOLUTIONS SL",
+                TaxID = "B44531218",
+                Address = "AV CAMINO DE ONDA, 25",
+                PostalCode = "12530",
+                City = "BURRIANA",
+                Region = "CASTELLÓN",
+                CountryID = "ES",
+                Mail = "transportes@wefinz.com",
+                Phone = "+34 964 111 111"
+            },
+
+            // Expedidor o cargador efectivo.
+            new Party()
+            {
+                PartyRole = "EX",
+                PartyID = "WH01",
+                FullName = "ALMACÉN CENTRAL",
+                Address = "POL. INDUSTRIAL CARABONA, NAVE 12",
+                PostalCode = "12530",
+                City = "BURRIANA",
+                Region = "CASTELLÓN",
+                CountryID = "ES"
+            },
+
+            // Destinatario de la mercancía.
+            new Party()
+            {
+                PartyRole = "DS",
+                PartyID = "B12345678",
+                FullName = "CLIENTE DE EJEMPLO SL",
+                TaxID = "B12345678",
+                Address = "C/ MAYOR, 12",
+                PostalCode = "28001",
+                City = "MADRID",
+                Region = "MADRID",
+                CountryID = "ES",
+                Mail = "recepcion@cliente.es",
+                Phone = "+34 915 000 000"
+            },
+
+            // Lugar de origen del transporte.
+            new Party()
+            {
+                PartyRole = "OR",
+                FullName = "MUELLE DE CARGA 3",
+                Address = "POL. INDUSTRIAL CARABONA",
+                PostalCode = "12530",
+                City = "BURRIANA",
+                Region = "CASTELLÓN",
+                CountryID = "ES"
+            },
+
+            // Lugar de destino del transporte.
+            new Party()
+            {
+                PartyRole = "DE",
+                FullName = "PLATAFORMA LOGÍSTICA MADRID SUR",
+                Address = "AV. DE LA LOGÍSTICA, 45",
+                PostalCode = "28906",
+                City = "GETAFE",
+                Region = "MADRID",
+                CountryID = "ES"
+            }
+        }
+    };
+
+    dynamic result = ApiClient.Save(document);
+
+    if (result.ResultCode != 0)
+    {
+
+        Debug.Print($"Se ha producido un error al llamar al API: {result.ResultMessage}");
+
+    }
+    else
+    {
+
+        var url = $"{result.Return.DownloadURL}";
+        Debug.Print($"La url de acceso al documento DeCA es: {url}");
+
+              
+
+    }
+
+
+```
 El PDF generado incluirá automáticamente:
 
 - Información de identificación y control del documento.
