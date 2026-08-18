@@ -72,7 +72,7 @@ namespace DeCA.Net.Rest
         /// <summary>
         /// Endpoint creación de documentos DeCA.
         /// </summary>
-        public string EndPointCreate { get; set; }
+        public string EndPointSave { get; set; }
 
         /// <summary>
         /// Endpoint anulación de documentos DeCA.

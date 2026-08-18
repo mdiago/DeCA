@@ -127,14 +127,14 @@ namespace DeCA.Net.Rest
         #region Métodos Públicos Estáticos
 
         /// <summary>
-        /// Crea un registro de alta mediante el API.
+        /// Crea o modifica un documento DeCA mediante el API.
         /// </summary>
         /// <param name="document">DECa a remitir de alta.</param>
         /// <returns>Resultado llamada API.</returns>
-        public static ExpandoObject Create(Document document) 
+        public static ExpandoObject Save(Document document) 
         {
 
-            return Post(document, Api.EndPointCreate);
+            return Post(document, Api.EndPointSave);
 
         }
 

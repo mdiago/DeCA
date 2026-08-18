@@ -221,7 +221,7 @@ namespace DeCA.Config
                 },
                 Api = new Api()
                 {
-                    EndPointCreate =            "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/Create",
+                    EndPointSave =              "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/Save",
                     EndPointDelete =            "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/Delete",
                     EndPointGetFilteredList =   "https://facturae.irenesolutions.com:8050/Kivu/Transport/DeCA/Documents/GetFilteredList",
                     ServiceKey =                "1234"
