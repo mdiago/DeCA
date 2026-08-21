@@ -64,7 +64,7 @@ namespace DeCA.Qrcode
 
         #endregion
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>Create a ByteMatix of given width and height, with the values initialized to 0</summary>
         /// <param name="width">width of the matrix</param>

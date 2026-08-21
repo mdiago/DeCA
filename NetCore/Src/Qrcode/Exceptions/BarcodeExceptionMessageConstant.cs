@@ -50,7 +50,7 @@ namespace DeCA.Qrcode.Exceptions
     public sealed class BarcodeExceptionMessageConstant 
     {
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Constructor.

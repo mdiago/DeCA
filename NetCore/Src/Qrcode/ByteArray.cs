@@ -57,7 +57,7 @@ namespace DeCA.Qrcode
 
         #endregion
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>Creates a new ByteArray instance with size 0.</summary>
         public ByteArray()

@@ -47,7 +47,7 @@ namespace DeCA.Net.Rest.Json.Parser.Lexer.Tokens
     internal class JsonRightBrace : JsonToken
     {
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Constructor.

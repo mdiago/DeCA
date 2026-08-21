@@ -59,7 +59,7 @@ namespace DeCA.Common
 
         #endregion
 
-        #region Construtores Estáticos
+        #region Constructores Estáticos
 
         /// <summary>
         /// Constructor estático clase.

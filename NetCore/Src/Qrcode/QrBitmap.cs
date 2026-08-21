@@ -68,7 +68,7 @@ namespace DeCA.Qrcode
 
         #endregion
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Consturctor.

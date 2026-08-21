@@ -55,7 +55,7 @@ namespace DeCA.Qrcode
 
         #endregion
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         internal BlockPair(ByteArray data, ByteArray errorCorrection)
         {

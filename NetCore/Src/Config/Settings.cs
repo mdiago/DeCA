@@ -102,7 +102,7 @@ namespace DeCA.Config
 
         #endregion
 
-        #region Construtores Estáticos
+        #region Constructores Estáticos
 
         /// <summary>
         /// Constructor estático de la clase Settings.

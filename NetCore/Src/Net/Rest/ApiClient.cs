@@ -64,7 +64,7 @@ namespace DeCA.Net.Rest
 
         #endregion
 
-        #region Construtores Estáticos
+        #region Constructores Estáticos
 
         /// <summary>
         /// Constructor.

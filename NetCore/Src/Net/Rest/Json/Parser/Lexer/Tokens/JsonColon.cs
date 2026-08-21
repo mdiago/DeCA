@@ -48,7 +48,7 @@ namespace DeCA.Net.Rest.Json.Parser.Lexer.Tokens
     internal class JsonColon : JsonToken
     {
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Constructor.

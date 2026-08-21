@@ -50,7 +50,7 @@ namespace DeCA.Qrcode.Exceptions
     public sealed class WriterException : Exception 
     {
 
-        #region Construtores de Instancia        
+        #region Constructores de Instancia        
 
         /// <summary>Creates a WriterException.</summary>
         public WriterException()

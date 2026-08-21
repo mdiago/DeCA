@@ -49,7 +49,7 @@ namespace DeCA.Net.Rest.Json.Kivu
     public class JsonSerializableKivu: JsonSerializable
     {
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Constructor.

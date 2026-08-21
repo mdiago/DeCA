@@ -53,7 +53,7 @@ namespace DeCA.Net.Rest.Json.Serializer
         #endregion
 
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Valor a aplicar en la serialización.

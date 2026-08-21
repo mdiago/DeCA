@@ -76,7 +76,7 @@ namespace DeCA.Net.Rest.Json.Parser.Lexer.Tokens
 
         #endregion
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Constructor.

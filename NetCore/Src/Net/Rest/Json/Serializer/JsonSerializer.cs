@@ -143,7 +143,7 @@ namespace DeCA.Net.Rest.Json.Serializer
 
         #endregion
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Construye una nueva instancia de serializador de tipo.

@@ -118,7 +118,7 @@ namespace DeCA.Business
 
         #endregion
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         /// <summary>
         /// Constructor de la clase <see cref="DeCADocument"/> que recibe una instancia de <see cref="Document"/>.
@@ -237,6 +237,9 @@ namespace DeCA.Business
             foreach (var party in _Document.Parties)
             {
 
+                if(string.IsNullOrEmpty(party.PartyRole))
+                    errors.Add($"PartyRole no puede ser nulo o vacío para el interlocutor {party.PartyID}.");
+
                 if (partyRolesCount.ContainsKey(party.PartyRole))
                     partyRolesCount[party.PartyRole]++;
                 else
@@ -328,7 +331,7 @@ namespace DeCA.Business
             if (_Pdf != null)
                 Utils.Throw("El documento DeCA ya tiene asignado un PDF.", new ArgumentException("El documento DeCA ya tiene asignado un PDF."));
 
-            _Pdf = _DeCAPdfConverter.GetPdf();
+            _Pdf = _DeCAPdfConverter.GetPdf(new Dictionary<string, string>() { { "IssueDateTime", "yyyy-MM-dd" },{ "TransportDate", "yyyy-MM-dd" } });
             _Document.FileHash = BitConverter.ToString(System.Security.Cryptography.SHA256.Create().ComputeHash(_Pdf)).Replace("-", "");
             _Document.FileSize = _Pdf.Length;
             _Document.FileName = $"{FileName}.pdf";

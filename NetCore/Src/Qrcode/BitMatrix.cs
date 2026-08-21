@@ -73,7 +73,7 @@ namespace DeCA.Qrcode
 
         #endregion
 
-        #region Construtores de Instancia
+        #region Constructores de Instancia
 
         // A helper to construct a square matrix.
         public BitMatrix(int dimension)
